@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homework1", "Homework1\Home
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Homework2", "Homework2", "{666F96CC-01AC-4EEA-A2D6-C0DC892AF023}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homework2", "Homework2\Homework2\Homework2.csproj", "{98D12C15-ACAD-4C5E-B208-5E9B47C9E7A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homework2", "Homework2\Homework2\Homework2.csproj", "{98D12C15-ACAD-4C5E-B208-5E9B47C9E7A0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Homework3", "Homework3", "{CFF936E4-ADFB-45BF-A69D-7EEFBDF2B160}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homework3", "Homework3\Homework3\Homework3.csproj", "{AC58CB01-EBEA-4888-B836-4AEDD4848860}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +29,10 @@ Global
 		{98D12C15-ACAD-4C5E-B208-5E9B47C9E7A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98D12C15-ACAD-4C5E-B208-5E9B47C9E7A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98D12C15-ACAD-4C5E-B208-5E9B47C9E7A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC58CB01-EBEA-4888-B836-4AEDD4848860}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC58CB01-EBEA-4888-B836-4AEDD4848860}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC58CB01-EBEA-4888-B836-4AEDD4848860}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC58CB01-EBEA-4888-B836-4AEDD4848860}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B13C740A-EBBC-4D65-B31A-3B2017AE12C6} = {7F2C8490-8FBF-4A7F-9CB2-C43E38779504}
 		{98D12C15-ACAD-4C5E-B208-5E9B47C9E7A0} = {666F96CC-01AC-4EEA-A2D6-C0DC892AF023}
+		{AC58CB01-EBEA-4888-B836-4AEDD4848860} = {CFF936E4-ADFB-45BF-A69D-7EEFBDF2B160}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E412EA90-6137-4E34-A32D-CF15ABB254B4}
