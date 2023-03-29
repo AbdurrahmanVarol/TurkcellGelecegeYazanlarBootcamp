@@ -1,8 +1,8 @@
 ﻿namespace Homework4
 {
-    public class Program
+    internal class Program
     {
-        public void Main(string[] args)
+        static void Main(string[] args)
         {
             // "In"
             //Generic interface lerde "in" key word ü interface in içerisindeki metot imzalarına gelen parametrelerin tipini belirler
@@ -32,24 +32,24 @@
         }
     }
 
-    public class Animal
+    class Animal
     {
 
     }
-    public class Fish : Animal
+    class Fish : Animal
     {
 
     }
-    public class Cat : Animal
+    class Cat : Animal
     {
 
     }
 
-    public interface IInRepository<in T>
+    interface IInRepository<in T>
     {
         void Add(T item);
     }
-    public class Repository<T> : IInRepository<T>
+    class Repository<T> : IInRepository<T>
     {
         public void Add(T item)
         {
@@ -57,11 +57,11 @@
         }
     }
 
-    public interface IOutRepository<out T>
+    interface IOutRepository<out T>
     {
         T Add();
     }
-    public class OutRepository<T> : IOutRepository<T> where T : class, new()
+    class OutRepository<T> : IOutRepository<T> where T : class, new()
     {
         public T Add()
         {
