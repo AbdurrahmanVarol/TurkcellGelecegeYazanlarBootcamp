@@ -10,7 +10,7 @@ namespace Homework3.AbstractClass
     {
         //içerisinde tamamlanmış ve tamamlanmamış metotlaarı barındıran class tır
         // abstract class ların constructor ları olabilir fakat abstract class ların bir instance ı oluşturulamaz yani new lenemezler.
-        public AbstractClass()
+        public AbstractClass()  
         {
             MessageSenderBase emailSender = new EmailSender("some value");
             MessageSenderBase smsSender = new SmsSender("some value");

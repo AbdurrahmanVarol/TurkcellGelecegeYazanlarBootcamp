@@ -28,7 +28,7 @@ namespace Homework6
         public IProductService ProductService { get; set; }
 
         //3.yöntme metot parametresi ile
-        void AddProduct(IProductService productService)
+        public void AddProduct(IProductService productService)
         {
             _productService.Add();
             ProductService.Add();

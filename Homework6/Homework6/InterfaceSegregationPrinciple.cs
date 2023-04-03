@@ -9,7 +9,7 @@ namespace Homework6
     internal class InterfaceSegregationPrinciple
     {
     }
-    public class Product
+    public class brand
     {
 
     }
@@ -21,9 +21,9 @@ namespace Homework6
     {
         List<T> GetAll();
     }
-    public interface IProductService : IEntityRepository<Product>
+    public interface IBrandService : IEntityRepository<brand>
     {
-        List<Product> GetProductsByCategoryId(int categoryId);
+        List<brand> GetProductsByCategoryId(int categoryId);
     }
     public interface ICategoryService : IEntityRepository<Category>
     {
