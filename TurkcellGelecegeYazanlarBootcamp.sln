@@ -39,6 +39,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HighSchoolExample.ConsoleAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HighSchoolExample.WindowsFormApp", "HighSchoolExample\Presentation\HighSchoolExample.WindowsFormApp\HighSchoolExample.WindowsFormApp.csproj", "{0499362A-C1E8-4D7B-8020-7BD298850932}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CssExamples", "CssExamples", "{AA79DB74-6D2B-40F8-9A8C-ED65EE4D3FBC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Flex-Wrap", "Flex-Wrap", "{AA2A97B2-23CC-40AD-B80E-020065B56A70}"
+	ProjectSection(SolutionItems) = preProject
+		CssExamples\Flex-Wrap\cat.png = CssExamples\Flex-Wrap\cat.png
+		index.html = index.html
+		style.css = style.css
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +110,7 @@ Global
 		{33BB547D-DFCE-494B-8965-8A24E53F006C} = {BF1B13EB-C95D-4754-B29B-853A734CBA8F}
 		{5C22D5A0-03ED-449F-A06B-D1039D4EF2DA} = {33BB547D-DFCE-494B-8965-8A24E53F006C}
 		{0499362A-C1E8-4D7B-8020-7BD298850932} = {33BB547D-DFCE-494B-8965-8A24E53F006C}
+		{AA2A97B2-23CC-40AD-B80E-020065B56A70} = {AA79DB74-6D2B-40F8-9A8C-ED65EE4D3FBC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E412EA90-6137-4E34-A32D-CF15ABB254B4}
