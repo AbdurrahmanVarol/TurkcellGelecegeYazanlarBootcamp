@@ -31,13 +31,6 @@ namespace HighSchoolExample.Infrastructure.Services.Concrete.InMemory
         public Homework Get(Func<Homework, bool> filter) => _homeworks.FirstOrDefault(filter);
 
         public List<Homework> GetAll(Func<Homework, bool> filter = null) => filter == null ? _homeworks : _homeworks.Where(filter).ToList();
-        private int GetNextId()
-        {
-            if (!_homeworks.Any())
-            {
-                return 1;
-            }
-            return _homeworks.Max(p => p.Id) + 1;
-        }
+        private int GetNextId() => _homeworks.Select(p => p.Id).DefaultIfEmpty(1).Max();
     }
 }

@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HighSchoolExample.Infrastructure.Services.Concrete.EntityFramework.InMemory
+namespace HighSchoolExample.Infrastructure.Services.Concrete.EntityFramework
 {
     public class EfHomewotkService : IHomeworkService
     {

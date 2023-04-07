@@ -1,6 +1,5 @@
 ﻿using HighSchoolExample.Core.Entities.Concrete;
 using HighSchoolExample.Infrastructure.Services.Abstract;
-using HighSchoolExample.Infrastructure.Services.Concrete.EntityFramework.InMemory;
 using HighSchoolExample.Infrastructure.Validation.FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -24,6 +23,7 @@ namespace HighSchoolExample.Infrastructure.Services.Concrete.InMemory
 
         public void Add(Student entity)
         {
+            entity.Id = GetNextId();
             var validator = new StudentValidator(_classService, this);
             ValidationTool.FluentValidate(validator, entity);
             _students.Add(entity);
@@ -54,13 +54,6 @@ namespace HighSchoolExample.Infrastructure.Services.Concrete.InMemory
             updatedStudent.ClassId = entity.ClassId;
             updatedStudent.Class = entity.Class;
         }
-        private int GetNextId()
-        {
-            if (!_students.Any())
-            {
-                return 1;
-            }
-            return _students.Max(p => p.Id) + 1;
-        }
+        private int GetNextId() => _students.Select(p => p.Id).DefaultIfEmpty(1).Max();
     }
 }

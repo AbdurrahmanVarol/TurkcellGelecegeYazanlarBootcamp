@@ -43,13 +43,6 @@ namespace HighSchoolExample.Infrastructure.Services.Concrete.InMemory
             updatedTeacher.FirstName = entity.FirstName;
             updatedTeacher.LastName = entity.LastName;
         }
-        private int GetNextId()
-        {
-            if (!_teachers.Any())
-            {
-                return 1;
-            }
-            return _teachers.Max(p => p.Id) + 1;
-        }
+        private int GetNextId() => _teachers.Select(p => p.Id).DefaultIfEmpty(1).Max();
     }
 }
