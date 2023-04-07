@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+        }
+        .grid{
+            width: 60%;
+            height: 70vh;
+            padding: 20px;
+            border: 1px solid black;
+            border-radius: 15px;
+            background-color: maroon;            
+            display: grid;
+            grid-template-areas: 
+            "header header header"
+            "sidemenu content content"
+            "sidemenu content content"
+            "sidemenu content content"
+            "sidemenu content content"
+            "footer footer footer";
+            gap: 10px;
+            
+        }
+        .header{
+            border: 1px solid white;    
+            border-radius: 15px;     
+            background-color: tomato;   
+            padding-top: 20px;
+            grid-area: header;
+            
+        }
+        .sideMenu{
+            border: 1px solid white;
+            border-radius: 15px;
+            background-color: steelblue; 
+            grid-area: sidemenu;
+        }
+        .content{
+            border: 1px solid white;
+            border-radius: 15px;
+            background-color: palevioletred; 
+            grid-area: content;
+        }
+        .footer{
+            border: 1px solid white;
+            border-radius: 15px;
+            background-color: olive; 
+            grid-area: footer;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="container">
+        <section class="grid">
+            <header class="header">
+                Header
+            </header>
+            <section class="sideMenu">
+                Side Menü
+            </section>
+            <section class="content">
+                Content
+            </section>
+            <footer class="footer">
+                Footer
+            </footer>
+        </section>
+    </section>
+</body>
+
+</html>
