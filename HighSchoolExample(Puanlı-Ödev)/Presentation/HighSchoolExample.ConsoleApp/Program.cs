@@ -21,7 +21,6 @@ namespace HighSchoolExample.ConsoleApp
         private static StudentController _studentController = new StudentController(_classesService, _studentService, _homeworkService);
         private static TeacherController _teacherController = new TeacherController(_classesService, _homeworkService, _teacherService);
 
-        // command pattern?
         static string[] menu =
         {
             "İşleminizi Seçiniz: ",
