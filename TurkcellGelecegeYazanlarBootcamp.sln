@@ -51,6 +51,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Grid", "Grid", "{71A43854-2
 		CssExamples\Grid\index.html = CssExamples\Grid\index.html
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GlassEffect", "GlassEffect", "{CFBA15A4-945A-4E58-A305-0F41978CD4DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -110,6 +112,7 @@ Global
 		{F8AE87FC-E5D4-4749-AFFD-E3D176C3A9B2} = {BF1B13EB-C95D-4754-B29B-853A734CBA8F}
 		{923A3EA5-2E36-4231-96FA-7E2461227CB6} = {33BB547D-DFCE-494B-8965-8A24E53F006C}
 		{71A43854-2375-4A59-91F8-EBCF185AB9C0} = {AA79DB74-6D2B-40F8-9A8C-ED65EE4D3FBC}
+		{CFBA15A4-945A-4E58-A305-0F41978CD4DB} = {AA79DB74-6D2B-40F8-9A8C-ED65EE4D3FBC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E412EA90-6137-4E34-A32D-CF15ABB254B4}
