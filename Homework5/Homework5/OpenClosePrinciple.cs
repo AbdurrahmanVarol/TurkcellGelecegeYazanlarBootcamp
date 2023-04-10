@@ -6,49 +6,79 @@ using System.Threading.Tasks;
 
 namespace Homework5
 {
-    public class OpenClosePrinciple
+    class OpenClosePrinciple
     {
+
         public OpenClosePrinciple()
         {
             //OpenClosePrinciple bir kodun değişime kapalı gelişime açık olması gerektiğini vurgular
-            //Örneğin projede entityframework kullanılırken hibernate e geçilmek istendiğinde proje içerisinde bir aşırı bir değişiklik yapmadan sistemi hibernate geçirmemiz gerekir.
+            //Bu örnekte projeye yeni logger ya da cache yöntemleri eklendiği halde proje içerisinde çok fazla değişiklik yapılmadığı bir seneryo simüle edilmiştir
+            //LoggerBase logger = new DatabaseLogger();
+            //ICache cache = new RedisCache();
 
-            IProductDal entityframewotkProductDal = new EntityFrameworkProductDal();
-            IProductDal hibernateProductDal = new HibernateProductDal();
+            //LoggerBase logger = new FileLogger();
+            //ICache cache = new RedisCache();
 
-            //var productService = new ProductService(entityframewotkProductDal);
-            var productService = new ProductService(hibernateProductDal);
+            //LoggerBase logger = new DatabaseLogger();
+            //ICache cache = new InMemoryCache();
+
+            LoggerBase logger = new FileLogger();
+            ICache cache = new InMemoryCache();
+
+
+            logger.Log("info");
+            cache.Get("info");
 
         }
     }
-    public class ProductService
+
+    internal abstract class LoggerBase
     {
-        private readonly IProductDal _productDal;
-        public ProductService(IProductDal productDal)
+        internal abstract void Log(string message);
+    }
+
+    internal class DatabaseLogger : LoggerBase
+    {
+        internal override void Log(string message)
         {
-            _productDal = productDal;
+            Console.WriteLine("Logged to Database");
         }
     }
-
-    public interface IProductDal
+    internal class FileLogger : LoggerBase
     {
-        void AddProduct();
-    }
-
-    public class EntityFrameworkProductDal : IProductDal
-    {
-        public void AddProduct()
+        internal override void Log(string message)
         {
-            Console.WriteLine("Product Added with Entityframework");
+            Console.WriteLine("Logged to File");
         }
     }
 
-    public class HibernateProductDal : IProductDal
+    internal interface ICache
     {
-        public void AddProduct()
+        string Get(string key);
+        void Set(string key, string value);
+    }
+    internal class RedisCache : ICache
+    {
+        public string Get(string key)
         {
-            Console.WriteLine("Product Added with Hibernate");
+            throw new NotImplementedException();
+        }
+
+        public void Set(string key, string value)
+        {
+            throw new NotImplementedException();
         }
     }
+    internal class InMemoryCache : ICache
+    {
+        public string Get(string key)
+        {
+            throw new NotImplementedException();
+        }
 
+        public void Set(string key, string value)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
