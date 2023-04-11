@@ -59,6 +59,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BootstrapExample", "Bootstr
 		CssExamples\BootstrapExample\laptop.jpg = CssExamples\BootstrapExample\laptop.jpg
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JavascriptExamples", "JavascriptExamples", "{B21151EA-F9C7-4655-931F-D20C427B896D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RandomlyChangeColorOfElements", "RandomlyChangeColorOfElements", "{B09096C9-D2A7-4DA1-9490-E4ADFC9CEF90}"
+	ProjectSection(SolutionItems) = preProject
+		JavascriptExamples\RandomlyChangeColorOfElements\changeColor.js = JavascriptExamples\RandomlyChangeColorOfElements\changeColor.js
+		JavascriptExamples\RandomlyChangeColorOfElements\index.html = JavascriptExamples\RandomlyChangeColorOfElements\index.html
+		JavascriptExamples\RandomlyChangeColorOfElements\style.css = JavascriptExamples\RandomlyChangeColorOfElements\style.css
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -120,6 +129,7 @@ Global
 		{71A43854-2375-4A59-91F8-EBCF185AB9C0} = {AA79DB74-6D2B-40F8-9A8C-ED65EE4D3FBC}
 		{CFBA15A4-945A-4E58-A305-0F41978CD4DB} = {AA79DB74-6D2B-40F8-9A8C-ED65EE4D3FBC}
 		{1FA5A4D7-C1DB-4AEF-B7E5-368C7132E428} = {AA79DB74-6D2B-40F8-9A8C-ED65EE4D3FBC}
+		{B09096C9-D2A7-4DA1-9490-E4ADFC9CEF90} = {B21151EA-F9C7-4655-931F-D20C427B896D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E412EA90-6137-4E34-A32D-CF15ABB254B4}
