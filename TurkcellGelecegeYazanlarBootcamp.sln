@@ -68,6 +68,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RandomlyChangeColorOfElemen
 		JavascriptExamples\RandomlyChangeColorOfElements\style.css = JavascriptExamples\RandomlyChangeColorOfElements\style.css
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FetchExample", "FetchExample", "{5CD8BCFB-4A66-4FB5-B3FA-F2E8C83FE5EF}"
+	ProjectSection(SolutionItems) = preProject
+		JavascriptExamples\FetchExample\fetching.js = JavascriptExamples\FetchExample\fetching.js
+		JavascriptExamples\FetchExample\index.html = JavascriptExamples\FetchExample\index.html
+		JavascriptExamples\FetchExample\sytle.css = JavascriptExamples\FetchExample\sytle.css
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -130,6 +137,7 @@ Global
 		{CFBA15A4-945A-4E58-A305-0F41978CD4DB} = {AA79DB74-6D2B-40F8-9A8C-ED65EE4D3FBC}
 		{1FA5A4D7-C1DB-4AEF-B7E5-368C7132E428} = {AA79DB74-6D2B-40F8-9A8C-ED65EE4D3FBC}
 		{B09096C9-D2A7-4DA1-9490-E4ADFC9CEF90} = {B21151EA-F9C7-4655-931F-D20C427B896D}
+		{5CD8BCFB-4A66-4FB5-B3FA-F2E8C83FE5EF} = {B21151EA-F9C7-4655-931F-D20C427B896D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E412EA90-6137-4E34-A32D-CF15ABB254B4}
