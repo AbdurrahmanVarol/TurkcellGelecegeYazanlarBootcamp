@@ -1,13 +1,10 @@
 const loadCategories = ()=>{
-    console.log("asd")
     let categories = []
     fetch("https://dummyjson.com/products/categories")
       .then((response) => response.json())
       .then((data) => {        
           categories.push(...data)
           const categoryElement = document.getElementById("categories")
-          console.log("2")
-          console.log(categories)
           let htmlResult = ``
           for (let category of categories) {
             console.log("Category:" + category)
@@ -17,13 +14,12 @@ const loadCategories = ()=>{
           categoryElement.innerHTML=htmlResult
       });     
 }
-
+loadCategories()
 const getProductsByCategory =(category)=>{
    //https://dummyjson.com/products/category/laptops
    fetch(`https://dummyjson.com/products/category/${category}`)
    .then((response) => response.json())
    .then((data) => { 
-       console.log(data)
        let productElement  = document.getElementById('products')
        let htmlResult =``
 
@@ -77,7 +73,5 @@ const getImagesAsSlider = (product)=>{
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Next</span>
             </button>
-          </div>
-  `
+          </div>  `
 }
-loadCategories()
