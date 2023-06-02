@@ -1,0 +1,47 @@
+﻿@model RegisterRequest
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+<h1 class="text-center text-light mb-4">Kayıt Ol</h1>
+<div class="p-2 alert-danger" asp-validation-summary="ModelOnly"></div>
+<form asp-action="register" asp-controller="">
+    <div class="form-group">
+        <label class="text-light" asp-for="FirstName">Ad:</label>
+        <input class="form-control" asp-for="FirstName" placeholder="Adınızı girin" />
+    </div>
+    <br />
+    <div class="form-group">
+        <label class="text-light" asp-for="LastName">Soyad:</label>
+        <input class="form-control" asp-for="LastName" placeholder="Soyadınızı girin" />
+    </div>
+    <br />
+    <div class="form-group">
+        <label class="text-light" asp-for="Email">E-posta:</label>
+        <input type="email" class="form-control" asp-for="Email" placeholder="E-postanızı girin" />
+    </div>
+    <br />
+    <div class="form-group">
+        <label class="text-light" asp-for="NickName">Kullanıcı Adı:</label>
+        <input class="form-control" asp-for="NickName" placeholder="Kullanıcı adınızı girin" />
+    </div>
+    <br />
+    <div class="form-group">
+        <label class="text-light" asp-for="Password">Şifre</label>
+        <input class="form-control" asp-for="Password" type="password" placeholder="Şifrenizi girin" />
+    </div>
+    <br />
+    <div class="form-group">
+        <label class="text-light" asp-for="PasswordConfirm">Şifre Tekrarı</label>
+        <input class="form-control" asp-for="PasswordConfirm" type="password" placeholder="Şifrenizi tekrar girin" />
+    </div>
+    <br />
+    <div class="text-right">
+        <button style="float: right;" type="submit" class="btn btn-success">Kayıt Ol</button>
+    </div>
+</form>
+<br />
+<br />
+<div class="links">
+    <strong class="text-light">Hesabınız var mı?</strong><a href="login"><strong>Giriş yap</strong></a>
+</div>

@@ -1,0 +1,31 @@
+﻿@model LoginRequest
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+<h1 class="text-center text-light mb-4">Giriş Yap</h1>
+@if (TempData["LoginException"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["LoginException"]
+    </div>
+}
+<div class="p-2 alert-danger" asp-validation-summary="ModelOnly"></div>
+<form asp-action="login" asp-controller="auth" method="post">
+    <div class="mb-3 form-group">
+        <input class="form-control" asp-for="@(Model.NickName)" placeholder="Kullanıcı adınızı girin">
+    </div>
+    <div class="mb-3 form-group">
+        <input class="form-control" asp-for="@(Model.Password)" type="password" placeholder="Şifrenizi girin">
+    </div>
+    <div class="mb-3 form-check">
+        <input class="form-check-input" asp-for="IsKeepLoggedIn">
+        <label class="form-check-label text-light" asp-for="IsKeepLoggedIn">Beni hatırla</label>
+    </div>
+    <div class="text-right">
+        <button style="float: right;" type="submit" class="btn btn-success">Giriş Yap</button>
+    </div>
+</form>
+<div class="links">
+    <strong class="text-light">Hesabınız yok mu?</strong><a  asp-action="register" asp-controller="auth"><strong>Kayıt Ol</strong></a>
+</div>
