@@ -15,7 +15,12 @@ namespace SteamCloneApp.Business
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-            services.AddScoped<IAuthService,AuthService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IGameService, GameService>();
+            services.AddScoped<IGenreService, GenreService>();
+            services.AddScoped<IPublisherService, PublisherService>();
+            services.AddScoped<IDeveloperService, DeveloperService>();
         }
     }
 }

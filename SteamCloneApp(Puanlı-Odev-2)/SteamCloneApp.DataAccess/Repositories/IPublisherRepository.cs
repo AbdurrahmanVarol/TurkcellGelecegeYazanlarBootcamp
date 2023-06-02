@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SteamCloneApp.DataAccess.Repositories
 {
-    public interface IPublisherRepository : IEntityRepository<Review>
+    public interface IPublisherRepository : IEntityRepository<Publisher>
     {
     }
 }

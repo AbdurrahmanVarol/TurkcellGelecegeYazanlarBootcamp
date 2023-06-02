@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SteamCloneApp.DataAccess.Repositories.EntityFramework
 {
-    public class EfPublisherRepository : EfEntityRepositoryBase<Review, SteamCloneContext>, IPublisherRepository
+    public class EfPublisherRepository : EfEntityRepositoryBase<Publisher, SteamCloneContext>, IPublisherRepository
     {
         public EfPublisherRepository(SteamCloneContext context) : base(context)
         {
