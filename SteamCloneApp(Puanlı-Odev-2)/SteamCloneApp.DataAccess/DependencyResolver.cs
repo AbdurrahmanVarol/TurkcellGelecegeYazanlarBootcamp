@@ -30,6 +30,7 @@ namespace SteamCloneApp.DataAccess
             services.AddScoped<IDeveloperRepository, EfDeveloperRepository>();
             services.AddScoped<IPublisherRepository, EfPublisherRepository>();
             services.AddScoped<IReviewRepository, EfReviewRepository>();
+            services.AddScoped<IImageRepository, EfImageRepository>();
         }
     }
 }

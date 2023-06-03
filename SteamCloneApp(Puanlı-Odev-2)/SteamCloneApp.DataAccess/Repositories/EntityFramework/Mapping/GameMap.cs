@@ -21,6 +21,16 @@ namespace SteamCloneApp.DataAccess.Repositories.EntityFramework.Mapping
                 .WithOne(p => p.Game)
                 .HasForeignKey(p => p.GameId)
                 .OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(p => p.Images)
+                .WithOne(p => p.Game)
+                .HasForeignKey(p => p.GameId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Navigation(p => p.DevelopedBy).AutoInclude();
+            builder.Navigation(p => p.Genres).AutoInclude();
+            builder.Navigation(p => p.PublishedBy).AutoInclude();
+            builder.Navigation(p => p.Images).AutoInclude();
+
         }
     }
 }

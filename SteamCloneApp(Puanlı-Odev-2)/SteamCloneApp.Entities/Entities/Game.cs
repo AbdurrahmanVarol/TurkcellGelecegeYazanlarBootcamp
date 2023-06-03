@@ -25,5 +25,6 @@ namespace SteamCloneApp.Entities.Entities
         public ICollection<Genre> Genres { get; set; } = new List<Genre>();
 
         public ICollection<User> Users { get; set; } = new List<User>();
+        public ICollection<Image> Images{ get; set; } = new List<Image>();
     }
 }

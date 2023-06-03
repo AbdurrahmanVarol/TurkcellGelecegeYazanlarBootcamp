@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 using SteamCloneApp.Business;
 using SteamCloneApp.DataAccess;
+using SteamCloneApp.DataAccess.Repositories.EntityFramework.Contexts;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -47,7 +49,7 @@ app.MapControllerRoute(
 
 using (var scope = app.Services.GetService<IServiceScopeFactory>()?.CreateScope())
 {
-    //scope?.ServiceProvider.GetRequiredService<VotingDbContext>().Database.Migrate();
+    scope?.ServiceProvider.GetRequiredService<SteamCloneContext>().Database.Migrate();
 }
 
 app.Run();

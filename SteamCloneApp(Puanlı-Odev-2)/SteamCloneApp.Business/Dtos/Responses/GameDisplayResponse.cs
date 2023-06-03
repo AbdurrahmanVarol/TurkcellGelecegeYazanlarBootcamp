@@ -5,17 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteamCloneApp.Business.Dtos.Requests
+namespace SteamCloneApp.Business.Dtos.Responses
 {
-    public class CreateGameRequest
-    {        
+    public class GameDisplayResponse
+    {
+        public Guid Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime ReleaseAt { get; set; }
         public decimal Price { get; set; }
-        public int PublishedById { get; set; }
-        public int DevelopedById { get; set; }
-        public List<int> Genres { get; set; }
-        public List<string> ImageUrls{ get; set; }
+        public string PublisherName { get; set; }
+        public string DeveloperName { get; set; }
+        public List<string> Genres { get; set; }
+        public List<string> Images { get; set; }
     }
 }

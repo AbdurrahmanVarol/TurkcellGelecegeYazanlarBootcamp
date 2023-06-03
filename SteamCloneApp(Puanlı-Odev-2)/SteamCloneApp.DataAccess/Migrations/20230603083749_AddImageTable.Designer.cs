@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SteamCloneApp.DataAccess.Repositories.EntityFramework.Contexts;
 
@@ -11,9 +12,11 @@ using SteamCloneApp.DataAccess.Repositories.EntityFramework.Contexts;
 namespace SteamCloneApp.DataAccess.Migrations
 {
     [DbContext(typeof(SteamCloneContext))]
-    partial class SteamCloneContextModelSnapshot : ModelSnapshot
+    [Migration("20230603083749_AddImageTable")]
+    partial class AddImageTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

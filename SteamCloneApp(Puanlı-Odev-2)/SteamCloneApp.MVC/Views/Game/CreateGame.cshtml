@@ -38,9 +38,6 @@
                 </select>
             </div>
         </div>
-        <div class="col-6">
-            <h1>File Upload</h1>
-        </div>
     </div>
     <div class="row">
         <div class="mb-3 col-12">
@@ -61,10 +58,50 @@
             }
         </div>
     </div>
+<div class="row">
+    <div class="input-group input-group-lg mb-3">
+        <input id="url" class="form-control" placeholder="Resim url'i giriniz..ç" />
+        <button type="button" class="btn btn-success " onclick="addImage()">Resim Ekle</button>
+    </div>
+</div>
+<div>
+    <ul id="imageList">       
+    </ul>
+</div>
+    
+    <button type="button" id="add2" class="btn btn-outline-success" onclick="asd()">Ekle2</button>
     <button type="button" id="add" class="btn btn-outline-success">Ekle</button>
 
 @section Scripts{
     <script>
+        const getUrlsFromUl = () =>{
+            let urls = [...document.querySelectorAll('#imageList li img')]
+            return urls.map(p => p.src)
+
+        }
+        const getListItemAsString = (value) => {
+            return `
+                   <li class="fs-5 d-flex align-items-center mb-2">
+                       <button class="btn badge bg-danger text-light float-start me-2" onclick="removeImage(event)">&#x2715</button>
+                       <img src="${value}" width="600" height="337" />
+                   </li>
+                   `          
+        }
+        const addImage = () =>{
+            let input = document.getElementById('url')
+            let ul = document.getElementById('imageList')
+
+            ul.innerHTML = getListItemAsString(input.value) + ul.innerHTML
+            input.value = ''
+        }
+        const removeImage = (event) => {
+            event.cancelBubble = true
+            let li = event.target.parentNode
+            let ul = event.target.parentNode.parentNode
+            ul.removeChild(li);
+            changeItemCounter()
+        }
+
        const getDataFromInputs = () => {
             let title = document.getElementById('title').value
             let description = document.getElementById('description').value
@@ -75,6 +112,7 @@
             let array = [...document.getElementsByName(`genre`)]
             let checkedGenres = array.filter(p => p.checked)
             let genres = checkedGenres.map(p => p.value)
+            let imageUrls = getUrlsFromUl()
 
             let data = {
                 title,
@@ -83,7 +121,8 @@
                 developedById,
                 price,
                 releaseAt,
-                genres
+                genres,
+                imageUrls
             }
             return data
        }

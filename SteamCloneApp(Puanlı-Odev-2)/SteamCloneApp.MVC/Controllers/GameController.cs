@@ -40,5 +40,12 @@ namespace SteamCloneApp.MVC.Controllers
             _gameService.AddAsync(createGameRequest).GetAwaiter().GetResult();
             return Ok(createGameRequest);
         }
+
+        [HttpGet]
+        public IActionResult GameDetail(Guid id)
+        {
+           var game = _gameService.GetGameByIdAsync(id).GetAwaiter().GetResult();
+            return View(game);
+        }
     }
 }
