@@ -99,21 +99,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2DBreakoutGame", "2DBreakou
 		JavascriptExamples\2DBreakoutGame\trackTheScoreAndWin.html = JavascriptExamples\2DBreakoutGame\trackTheScoreAndWin.html
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Homework7", "Homework7", "{B2A93E2E-D295-40E2-8A6F-6E235F2E81B4}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hangfire", "Hangfire", "{E3CF1F6D-587D-4919-933D-54638020174A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HangFireExample", "Homework7\Hangfire\HangFireExample\HangFireExample.csproj", "{3991A106-96D8-4278-9CE8-52D72AB83E4B}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SteamCloneApp(Puanlı-Odev-2)", "SteamCloneApp(Puanlı-Odev-2)", "{D980451A-1219-40AC-9667-D952BE76B8D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamCloneApp.Entities", "SteamCloneApp(Puanlı-Odev-2)\SteamCloneApp.Entities\SteamCloneApp.Entities.csproj", "{BD2187ED-413F-423B-8236-0C76D713C637}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SteamCloneApp.Entities", "SteamCloneApp(Puanlı-Odev-2)\SteamCloneApp.Entities\SteamCloneApp.Entities.csproj", "{BD2187ED-413F-423B-8236-0C76D713C637}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamCloneApp.DataAccess", "SteamCloneApp(Puanlı-Odev-2)\SteamCloneApp.DataAccess\SteamCloneApp.DataAccess.csproj", "{BB1D09F3-E48D-4B67-8413-27E3F1E60FDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SteamCloneApp.DataAccess", "SteamCloneApp(Puanlı-Odev-2)\SteamCloneApp.DataAccess\SteamCloneApp.DataAccess.csproj", "{BB1D09F3-E48D-4B67-8413-27E3F1E60FDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamCloneApp.Business", "SteamCloneApp(Puanlı-Odev-2)\SteamCloneApp.Business\SteamCloneApp.Business.csproj", "{688CEEFC-CB3F-42D0-A521-855BE773F68E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SteamCloneApp.Business", "SteamCloneApp(Puanlı-Odev-2)\SteamCloneApp.Business\SteamCloneApp.Business.csproj", "{688CEEFC-CB3F-42D0-A521-855BE773F68E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamCloneApp.MVC", "SteamCloneApp(Puanlı-Odev-2)\SteamCloneApp.MVC\SteamCloneApp.MVC.csproj", "{554B2DC4-AE8E-409C-AE3E-C8336156211C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SteamCloneApp.MVC", "SteamCloneApp(Puanlı-Odev-2)\SteamCloneApp.MVC\SteamCloneApp.MVC.csproj", "{554B2DC4-AE8E-409C-AE3E-C8336156211C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -157,10 +151,6 @@ Global
 		{923A3EA5-2E36-4231-96FA-7E2461227CB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{923A3EA5-2E36-4231-96FA-7E2461227CB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{923A3EA5-2E36-4231-96FA-7E2461227CB6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3991A106-96D8-4278-9CE8-52D72AB83E4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3991A106-96D8-4278-9CE8-52D72AB83E4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3991A106-96D8-4278-9CE8-52D72AB83E4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3991A106-96D8-4278-9CE8-52D72AB83E4B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BD2187ED-413F-423B-8236-0C76D713C637}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BD2187ED-413F-423B-8236-0C76D713C637}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD2187ED-413F-423B-8236-0C76D713C637}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -200,8 +190,6 @@ Global
 		{5CD8BCFB-4A66-4FB5-B3FA-F2E8C83FE5EF} = {B21151EA-F9C7-4655-931F-D20C427B896D}
 		{EEF39C97-DE7A-46B2-B965-8142B895A093} = {3554EEFC-03D5-4708-B733-F5D38290CFA2}
 		{62B190F9-70C8-4BB3-921E-D1BD9B092652} = {B21151EA-F9C7-4655-931F-D20C427B896D}
-		{E3CF1F6D-587D-4919-933D-54638020174A} = {B2A93E2E-D295-40E2-8A6F-6E235F2E81B4}
-		{3991A106-96D8-4278-9CE8-52D72AB83E4B} = {E3CF1F6D-587D-4919-933D-54638020174A}
 		{BD2187ED-413F-423B-8236-0C76D713C637} = {D980451A-1219-40AC-9667-D952BE76B8D2}
 		{BB1D09F3-E48D-4B67-8413-27E3F1E60FDF} = {D980451A-1219-40AC-9667-D952BE76B8D2}
 		{688CEEFC-CB3F-42D0-A521-855BE773F68E} = {D980451A-1219-40AC-9667-D952BE76B8D2}
