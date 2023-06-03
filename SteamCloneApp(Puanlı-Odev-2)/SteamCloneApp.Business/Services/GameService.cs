@@ -60,7 +60,7 @@ namespace SteamCloneApp.Business.Services
                 DeveloperName = p.DevelopedBy.Name,
                 PublisherName = p.PublishedBy.Name,
                 Genres = p.Genres.Select(p => p.Name).ToList(),
-                Images = p.Images.Select(p => p.ImageUrl).ToList()
+                Images = p.Images.Select(p => p.ImageUrl).ToList()              
             }).ToList();
         }
 
@@ -81,7 +81,16 @@ namespace SteamCloneApp.Business.Services
                 DeveloperName = game.DevelopedBy.Name,
                 PublisherName = game.PublishedBy.Name,
                 Genres = game.Genres.Select(p => p.Name).ToList(),
-                Images = game.Images.Select(p => p.ImageUrl).ToList()
+                Images = game.Images.Select(p => p.ImageUrl).ToList(),
+                Reviews = game.Reviews.Select(p => new ReviewResponse
+                {
+                    Id = p.Id,
+                    GameId = p.GameId,
+                    IsRecommend = p.IsRecommend,
+                    Post = p.Post,
+                    PostedAt = p.PostedAt,
+                    UserId = p.UserId
+                }).ToList()
             };
             return response;
         }

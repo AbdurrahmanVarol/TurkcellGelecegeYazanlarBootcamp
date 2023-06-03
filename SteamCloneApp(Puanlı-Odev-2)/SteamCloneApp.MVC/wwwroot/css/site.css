@@ -1,22 +1,56 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: rgb(27, 40, 56);
+    color: #efefef
+}
+
+.authContent {
+    background-image: url('https://community.cloudflare.steamstatic.com/public/shared/images/joinsteam/new_login_bg_strong_mask.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.review {
+    background-color: #16202d;
+}
+
+.reviewForm {
+    background-color: rgb(60, 71, 83);
+    padding:20px;
+}
+    .reviewForm textarea{
+        border:1px solid;
+        border-radius:5px;
+        padding:15px;
+        width:100%;
+        color:white;
+    }
+    .reviewForm input, .reviewForm textarea {
+        background-color: rgb(34, 43, 53);
+        border-color: rgb(34, 43, 53) !important;
+    }
+.gameCard .card {
+    background-color: rgb(29, 49, 65) !important;
+    border-color: rgb(29, 49, 65) !important;
+    color:white;
 }

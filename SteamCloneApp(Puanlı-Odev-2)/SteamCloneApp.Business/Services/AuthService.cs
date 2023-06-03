@@ -1,4 +1,5 @@
 ﻿using SteamCloneApp.Business.Dtos.Requests;
+using SteamCloneApp.Business.Dtos.Responses;
 using SteamCloneApp.Entities.Entities;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace SteamCloneApp.Business.Services
             passwordHash = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(password)));
         }
 
-        public async Task LoginAsync(LoginRequest loginRequest)
+        public async Task<UserResponse> LoginAsync(LoginRequest loginRequest)
         {
             var user = await _userService.GetUserByNickNameAsync(loginRequest.NickName);
             var errorMessage = "Kullanıcı adı ya da şifre hatalı.\nLütfen tekrar deneyin.";
@@ -36,6 +37,15 @@ namespace SteamCloneApp.Business.Services
             {
                 throw new ArgumentException(errorMessage);
             }
+            return new UserResponse
+            {
+                Id = user.Id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                NickName = user.NickName,
+                Roles = user.Roles.Select(p => p.Name).ToList()
+            };
             //return _mapper.Map<UserResponse>(user);
         }
 

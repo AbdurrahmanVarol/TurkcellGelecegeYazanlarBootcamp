@@ -16,9 +16,9 @@ namespace SteamCloneApp.MVC.Controllers
             _gameService = gameService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var games = _gameService.GetAllAsync().GetAwaiter().GetResult();
+            var games = await _gameService.GetAllAsync();
             return View(games);
         }
 

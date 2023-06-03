@@ -9,10 +9,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('/images/bgAuth.jpg');
+    background-color: rgb(24, 26, 33);
+    /*  background-image: url('/images/bgAuth.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center;*/
 }
 
 #content {

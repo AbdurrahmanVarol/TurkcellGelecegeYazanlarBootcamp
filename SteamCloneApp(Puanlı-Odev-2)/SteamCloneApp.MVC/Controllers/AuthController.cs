@@ -23,28 +23,27 @@ namespace SteamCloneApp.MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LoginRequest loginRequest)
+        public async Task<IActionResult> Login(LoginRequest loginRequest)
         {
             try
             {
-                 _authService.LoginAsync(loginRequest).GetAwaiter().GetResult();
+                var user = await _authService.LoginAsync(loginRequest);
 
-                //var claims = new List<Claim>
-                //{
-                //    new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
-                //    new Claim("Name",user.FirstName),
-                //    new Claim("FullName",user.FullName)
-                //};
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
+                    new Claim(ClaimTypes.Name,user.FirstName),
+                    new Claim("FullName",user.FullName)
+                };
 
-                //var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                //var authenticationProperties = new AuthenticationProperties
-                //{
-                //    AllowRefresh = true,
-                //    IsPersistent = loginRequest.IsKeepLoggedIn,
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var authenticationProperties = new AuthenticationProperties
+                {
+                    AllowRefresh = true,
+                    IsPersistent = loginRequest.IsKeepLoggedIn,
+                };
 
-                //};
-
-                //HttpContext.SignInAsync(new ClaimsPrincipal(claimsIdentity), authenticationProperties).GetAwaiter().GetResult();
+                await HttpContext.SignInAsync(new ClaimsPrincipal(claimsIdentity), authenticationProperties);
                 return RedirectToAction("index", "home");
             }
             catch (Exception exception)
@@ -56,9 +55,9 @@ namespace SteamCloneApp.MVC.Controllers
 
         }
         [HttpGet]
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            HttpContext.SignOutAsync().GetAwaiter().GetResult();
+            await HttpContext.SignOutAsync();
             return RedirectToAction("login");
         }
 

@@ -30,6 +30,7 @@ namespace SteamCloneApp.DataAccess.Repositories.EntityFramework.Mapping
             builder.Navigation(p => p.Genres).AutoInclude();
             builder.Navigation(p => p.PublishedBy).AutoInclude();
             builder.Navigation(p => p.Images).AutoInclude();
+            builder.Navigation(p => p.Reviews).AutoInclude();
 
         }
     }

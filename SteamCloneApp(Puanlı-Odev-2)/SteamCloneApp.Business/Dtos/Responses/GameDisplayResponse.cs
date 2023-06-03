@@ -18,5 +18,6 @@ namespace SteamCloneApp.Business.Dtos.Responses
         public string DeveloperName { get; set; }
         public List<string> Genres { get; set; }
         public List<string> Images { get; set; }
+        public List<ReviewResponse> Reviews { get; set; }
     }
 }

@@ -16,8 +16,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         option.LoginPath = "/auth/login";
         option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-        option.AccessDeniedPath = "/";
-        option.ReturnUrlParameter = "";
+        option.AccessDeniedPath = "/auth/accessdenied";
     });
 
 
@@ -35,13 +34,14 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
+
+app.UseRouting();
 
 app.UseAuthentication();
 
 app.UseAuthorization();
-
-app.UseRouting();
 
 app.MapControllerRoute(
     name: "default",

@@ -3,36 +3,138 @@
     ViewData["Title"] = "GameDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="true">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src=@Model.Images.Last() class="d-block w-100" alt=@Model.Title>
-        </div>
-        @foreach(var imageUrl in Model.Images)
-        {
-            <div class="carousel-item">
-                <img src=@imageUrl class="d-block w-100" alt=@Model.Title>
+<h2>@Model.Title</h2>
+<div class="row">
+    <div class="col-7">
+        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="true">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src=@Model.Images.Last() class="d-block w-100" alt=@Model.Title>
+                </div>
+                @foreach (var imageUrl in Model.Images)
+                {
+                    <div class="carousel-item">
+                        <img src=@imageUrl class="d-block w-100" alt=@Model.Title>
+                    </div>
+                }
             </div>
-        }
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
+    <div class="col-4">
+        <img src=@Model.Images.FirstOrDefault() class="card-img-top mb-3" alt="Kapak resmi">
+        <p class="card-text mb-2">@Model.Description</p>
+        <p class="card-text mb-1">ÇIKIŞ TARİHİ: @Model.DeveloperName</p>
+        <p class="card-text mb-1">GELİŞTİRİCİ: @Model.DeveloperName</p>
+        <p class="card-text mb-1">YAYINCI: @Model.PublisherName</p>
+        <p>
+            KATEGORİLER:
+            @foreach (var genre in Model.Genres)
+            {
+                @($"{genre} ")
+            }
+        </p>
+    </div>
 </div>
+@if (ViewBag.IsAuthenticated != null && ViewBag.IsAuthenticated)
+{
+    <div class="mb-4 reviewForm">
+        <h3 class="text-info">@(Model.Title) için bir inceleme yazın</h3>
+        <p>
+            Bu oyun hakkında neyi sevip neyi sevmediğinizi ve bu oyunu başkalarına önerip önermeyeceğinizi yazın.
+            Lütfen kibar olmayı ve Kurallar ve Yönergeler doğrultusunda hareket etmeyi unutmayın.
+        </p>
+        <div class="p-2 d-flex">
+            <div class="bg-dark me-3" style="width:100px;height:100px;">
+            </div>
+            <div class="col-10">
+                <textarea id="post" rows="7"></textarea>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between">
+            <div>
+                <p>Bu oyunu tavsiye ediyor musunuz?</p>
+                <input type="radio" class="btn-check" name="isRecommend" id="success-outlined" value="1" autocomplete="off" checked>
+                <label class="btn btn-outline-info" for="success-outlined">Evet</label>
+
+                <input type="radio" class="btn-check" name="isRecommend" id="danger-outlined" value="0" autocomplete="off">
+                <label class="btn btn-outline-info" for="danger-outlined">Hayır</label>
+            </div>
+            <div class="d-flex align-items-end">
+                <button id="addReview" class="btn btn-secondary">İnceleme yaz</button>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="reviews">
+    <h4>İncelemeler</h4>
+    @foreach (var review in Model.Reviews)
+    {
+        <div class="row mb-3 review">
+            <div class="col-2 bg-dark">aa</div>
+            <div class="col-9 ms-2">
+                <div>
+                    @if (review.IsRecommend)
+                    {
+                        <p><span class="text-info">OK</span> TAVSİYE Ediliyor </p>
+
+
+                    }
+                    else
+                    {
+                        <p><span class="text-danger">BAD</span> TAVSİYE EDİLMİYOR </p>
+
+                    }
+                </div>
+                <p>Tarih: @review.PostedAt</p>
+                <p>@review.Post</p>
+            </div>
+        </div>
+    }
+
+</div>
+
 
 @section Scripts{
     <script>
-        const myCarouselElement = document.querySelector('#carouselExampleAutoplaying')
 
-        const carousel = new bootstrap.Carousel(myCarouselElement, {
-            interval: 3000,
-            touch: false
+        $(document).ready(function () {
+            //carousel animasyon
+            const myCarouselElement = document.querySelector('#carouselExampleAutoplaying')
+
+            const carousel = new bootstrap.Carousel(myCarouselElement, {
+                interval: 3000,
+                touch: false
+            })
+
+
+            $('#addReview').on('click', function () {
+                let post = document.getElementById('post')
+                let recommends = [...document.getElementsByName('isRecommend')]
+                let recommend = recommends.find(p => p.checked)
+                let gameId = '@Model.Id'
+                let dataa = {
+                    post: post.value,
+                    isRecommend: recommend.value == '1',
+                    gameId
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/Review/CreateReview",
+                    data: dataa,
+                    success: function () { }
+                })
+            })
+
         })
+
     </script>
 }
