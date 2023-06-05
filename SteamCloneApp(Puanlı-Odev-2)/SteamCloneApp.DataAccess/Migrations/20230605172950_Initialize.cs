@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace SteamCloneApp.DataAccess.Migrations
 {
     /// <inheritdoc />
@@ -41,7 +39,7 @@ namespace SteamCloneApp.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Publisher",
+                name: "Publishers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -51,7 +49,7 @@ namespace SteamCloneApp.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Publisher", x => x.Id);
+                    table.PrimaryKey("PK_Publishers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -93,6 +91,8 @@ namespace SteamCloneApp.DataAccess.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReleaseAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    IconUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CoverUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PublishedById = table.Column<int>(type: "int", nullable: false),
                     DevelopedById = table.Column<int>(type: "int", nullable: false)
                 },
@@ -106,9 +106,9 @@ namespace SteamCloneApp.DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Games_Publisher_PublishedById",
+                        name: "FK_Games_Publishers_PublishedById",
                         column: x => x.PublishedById,
-                        principalTable: "Publisher",
+                        principalTable: "Publishers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -186,7 +186,27 @@ namespace SteamCloneApp.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Review",
+                name: "Images",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GameId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Images_Games_GameId",
+                        column: x => x.GameId,
+                        principalTable: "Games",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reviews",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
@@ -198,77 +218,20 @@ namespace SteamCloneApp.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Review", x => x.Id);
+                    table.PrimaryKey("PK_Reviews", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Review_Games_GameId",
+                        name: "FK_Reviews_Games_GameId",
                         column: x => x.GameId,
                         principalTable: "Games",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Review_Users_UserId",
+                        name: "FK_Reviews_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.InsertData(
-                table: "Developers",
-                columns: new[] { "Id", "Description", "Name" },
-                values: new object[,]
-                {
-                    { 1, "Larian Studios is an independent RPG developer founded in 1996 in Gent, Belgium.", "Larian Studios" },
-                    { 2, "FromSoftware, Inc. is established in Sasazuka, Shibuya-ku, Tokyo, for the development of business application software.", "Fromsoftware" },
-                    { 3, "PlayStation Studios is home to the development of Sony Interactive Entertainment’s own outstanding and immersive games, including some of the most popular and critically acclaimed titles in entertainment history.", "Santa Monica Studio" },
-                    { 4, "PlayStation Studios is home to the development of Sony Interactive Entertainment’s own outstanding and immersive games, including some of the most popular and critically acclaimed titles in entertainment history.", "Guerrilla" },
-                    { 5, "Ubisoft is a creator of worlds, committed to enriching players' lives with original and memorable gaming experiences.", "Ubisoft Toronto" },
-                    { 6, "Ubisoft is a creator of worlds, committed to enriching players' lives with original and memorable gaming experiences.", "Ubisoft Quebec" },
-                    { 7, "CD PROJEKT RED is a development studio founded in 2002. Our mission is to tell emotional stories riddled with meaningful choices and consequences, as well as featuring characters gamers can truly connect with.", "CD PROJEKT RED" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Genres",
-                columns: new[] { "Id", "Name" },
-                values: new object[,]
-                {
-                    { 1, "Aksiyon" },
-                    { 2, "Basit Eğlence" },
-                    { 3, "Bağımsız" },
-                    { 4, "Devasa Çok Oyunculu" },
-                    { 5, "Macera" },
-                    { 6, "RYO" },
-                    { 7, "Simülasyon" },
-                    { 8, "Spor" },
-                    { 9, "Strateji" },
-                    { 10, "Yarış" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Publisher",
-                columns: new[] { "Id", "Description", "Name" },
-                values: new object[,]
-                {
-                    { 1, "Larian Studios is an independent RPG developer founded in 1996 in Gent, Belgium.", "Larian Studios" },
-                    { 2, "Bandai Namco exists to share dreams, fun and inspiration with people around the world. Do you wish to enjoy every single day to the fullest? What we want is for people like you to always have a reason to smile.", "Bandai Namco Entertainment" },
-                    { 3, "PlayStation Studios is home to the development of Sony Interactive Entertainment’s own outstanding and immersive games, including some of the most popular and critically acclaimed titles in entertainment history.", "PlayStation Studios" },
-                    { 4, "Ubisoft is a creator of worlds, committed to enriching players' lives with original and memorable gaming experiences.", "Ubisoft" },
-                    { 5, "CD PROJEKT RED is a development studio founded in 2002. Our mission is to tell emotional stories riddled with meaningful choices and consequences, as well as featuring characters gamers can truly connect with.", "CD PROJEKT RED" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Roles",
-                columns: new[] { "Id", "Name" },
-                values: new object[,]
-                {
-                    { 1, "Admin" },
-                    { 2, "Customer" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "Email", "FirstName", "LastName", "NickName", "PasswordHash", "PasswordSalt" },
-                values: new object[] { new Guid("6ee5154f-a0fb-4d83-ac6f-e0d866fa4350"), "abdurrahman@gmail.com", "Abdurrahman", "Varol", "abdurrahman", "WMA4dhrMhW2ZW3+8wIlpzcew0pVATmgSq4WZ+tjmiOW1R09J5lKdcxR16RIT1ds44FjeYM0o+ksAeTzSX6aXZQ==", "8qjYoxBQ2SgvH7vcbDsPbus2YFpicja5cDbz9IL6hJIgS4gTgr5uq1ADDLy7GHsIEY+0otBju+h74HRuNuFnU25/HWCXOjdKqPlksusj7mNjAR6rk9K9Oy4s1wIySzCoy3xi205Kqhgb4NJ0UcryFCvT6G/9QDQ63A9NyNVQ8s0=" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_GameGenre_GenresId",
@@ -291,13 +254,18 @@ namespace SteamCloneApp.DataAccess.Migrations
                 column: "UsersId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Review_GameId",
-                table: "Review",
+                name: "IX_Images_GameId",
+                table: "Images",
                 column: "GameId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Review_UserId",
-                table: "Review",
+                name: "IX_Reviews_GameId",
+                table: "Reviews",
+                column: "GameId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reviews_UserId",
+                table: "Reviews",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -316,7 +284,10 @@ namespace SteamCloneApp.DataAccess.Migrations
                 name: "GameUser");
 
             migrationBuilder.DropTable(
-                name: "Review");
+                name: "Images");
+
+            migrationBuilder.DropTable(
+                name: "Reviews");
 
             migrationBuilder.DropTable(
                 name: "RoleUser");
@@ -337,7 +308,7 @@ namespace SteamCloneApp.DataAccess.Migrations
                 name: "Developers");
 
             migrationBuilder.DropTable(
-                name: "Publisher");
+                name: "Publishers");
         }
     }
 }

@@ -14,11 +14,6 @@ namespace SteamCloneApp.DataAccess.Repositories.EntityFramework.Mapping
         public void Configure(EntityTypeBuilder<Role> builder)
         {
             builder.HasKey(p => p.Id);
-
-            builder.HasData(
-                    new Role { Id = 1, Name = "Admin" },
-                    new Role { Id = 2, Name = "Customer" }
-                );
         }
     }
 }

@@ -3,91 +3,96 @@
     ViewData["Title"] = "CreateGame";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-    <div class="row">
-        <div class="col-6">
-            <div class="mb-3">
-                <label for="title">Title</label>
-                <input class="form-control" id="title" placeholder="Title giriniz..." />
-            </div>
-            <div class="mb-3">
-                <label for="price">Fiyat</label>
-                <input class="form-control" id="price" placeholder="Fiyat giriniz..." />
-            </div>
-            <div class="mb-3">
-                <label>Çıkış tarihi</label>
-                <input type="datetime-local" id="releaseAt" class="form-control" />
-            </div>
-            <div class="mb-3">
-                <label for="publishedById">Yayımcı</label>
-                <select class="form-select" id="publishedById" placeholder="Fiyat giriniz...">
-                    <option selected hidden>Publisher seçiniz</option>
-                    @foreach (var publisher in Model.Publishers)
-                    {
-                        <option value=@publisher.Id>@publisher.Name</option>
-                    }
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="developedById">Geliştirici Stüdyo</label>
-                <select class="form-select" id="developedById" placeholder="Fiyat giriniz...">
-                    <option selected hidden>Developer seçiniz</option>
-                    @foreach (var developer in Model.Developers)
-                    {
-                        <option value=@developer.Id>@developer.Name</option>
-                    }
-                </select>
-            </div>
+<div class="row">
+    <div class="col-6">
+        <div class="mb-3">
+            <label for="title">Title</label>
+            <input class="form-control" id="title" placeholder="Title giriniz..." />
+        </div>
+        <div class="mb-3">
+            <label for="price">Fiyat</label>
+            <input class="form-control" id="price" placeholder="Fiyat giriniz..." />
+        </div>
+        <div class="mb-3">
+            <label>Çıkış tarihi</label>
+            <input type="datetime-local" id="releaseAt" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label for="publishedById">Yayımcı</label>
+            <select class="form-select" id="publishedById" placeholder="Fiyat giriniz...">
+                <option selected hidden>Publisher seçiniz</option>
+                @foreach (var publisher in Model.Publishers)
+                {
+                    <option value=@publisher.Id>@publisher.Name</option>
+                }
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="developedById">Geliştirici Stüdyo</label>
+            <select class="form-select" id="developedById" placeholder="Fiyat giriniz...">
+                <option selected hidden>Developer seçiniz</option>
+                @foreach (var developer in Model.Developers)
+                {
+                    <option value=@developer.Id>@developer.Name</option>
+                }
+            </select>
         </div>
     </div>
-    <div class="row">
-        <div class="mb-3 col-12">
+</div>
+<div class="row">
+    <div class="mb-3 col-12">
         <textarea class="form-control" rows="10" id="description" placeholder="Açıklama giriniz..."></textarea>
-        </div>
     </div>
-    <div class="row">
-        <h4>Türler</h4>
-        <div class="mb-3 col-12 d-flex flex-row">
-            @foreach (var genre in Model.Genres)
-            {
-                <div class="form-check m-2">
-                    <input class="form-check-input" type="checkbox" value=" @genre.Id" name="genre" id=@($"flexCheck{genre.Id}")>
-                    <label class="form-check-label" for=@($"flexCheck{genre.Id}")>
-                        @genre.Name
-                    </label>
-                </div>
-            }
-        </div>
+</div>
+<div class="row">
+    <h4>Türler</h4>
+    <div class="mb-3 col-12 d-flex flex-row">
+        @foreach (var genre in Model.Genres)
+        {
+            <div class="form-check m-2">
+                <input class="form-check-input" type="checkbox" value=" @genre.Id" name="genre" id=@($"flexCheck{genre.Id}")>
+                <label class="form-check-label" for=@($"flexCheck{genre.Id}")>
+                    @genre.Name
+                </label>
+            </div>
+        }
     </div>
+</div>
+<div class="row">
+    <div class="mb-3">
+        <label for="coverUrl">Kapak Resmi</label>
+        <input id="coverUrl" class="form-control" placeholder="Kapak resim url'i giriniz.." />
+    </div>
+</div>
 <div class="row">
     <div class="input-group input-group-lg mb-3">
-        <input id="url" class="form-control" placeholder="Resim url'i giriniz..ç" />
+        <input id="url" class="form-control" placeholder="Resim url'i giriniz.." />
         <button type="button" class="btn btn-success " onclick="addImage()">Resim Ekle</button>
     </div>
 </div>
 <div>
-    <ul id="imageList">       
+    <ul id="imageList">
     </ul>
 </div>
-    
-    <button type="button" id="add2" class="btn btn-outline-success" onclick="asd()">Ekle2</button>
-    <button type="button" id="add" class="btn btn-outline-success">Ekle</button>
+
+<button type="button" id="add" class="btn btn-outline-success">Ekle</button>
 
 @section Scripts{
     <script>
-        const getUrlsFromUl = () =>{
+        const getUrlsFromUl = () => {
             let urls = [...document.querySelectorAll('#imageList li img')]
             return urls.map(p => p.src)
 
         }
         const getListItemAsString = (value) => {
             return `
-                   <li class="fs-5 d-flex align-items-center mb-2">
-                       <button class="btn badge bg-danger text-light float-start me-2" onclick="removeImage(event)">&#x2715</button>
-                       <img src="${value}" width="600" height="337" />
-                   </li>
-                   `          
+                           <li class="fs-5 d-flex align-items-center mb-2">
+                               <button class="btn badge bg-danger text-light float-start me-2" onclick="removeImage(event)">&#x2715</button>
+                               <img src="${value}" width="600" height="337" />
+                           </li>
+                           `
         }
-        const addImage = () =>{
+        const addImage = () => {
             let input = document.getElementById('url')
             let ul = document.getElementById('imageList')
 
@@ -102,13 +107,14 @@
             changeItemCounter()
         }
 
-       const getDataFromInputs = () => {
+        const getDataFromInputs = () => {
             let title = document.getElementById('title').value
             let description = document.getElementById('description').value
             let publishedById = document.getElementById('publishedById').value
             let developedById = document.getElementById('developedById').value
             let price = document.getElementById('price').value
             let releaseAt = document.getElementById('releaseAt').value
+            let coverUrl = document.getElementById('coverUrl').value
             let array = [...document.getElementsByName(`genre`)]
             let checkedGenres = array.filter(p => p.checked)
             let genres = checkedGenres.map(p => p.value)
@@ -122,19 +128,21 @@
                 price,
                 releaseAt,
                 genres,
+                coverUrl,
+                iconUrl: coverUrl,
                 imageUrls
             }
             return data
-       }
-        $(document).ready(function(){
-          $('#add').on('click',function(){
+        }
+        $(document).ready(function () {
+            $('#add').on('click', function () {
                 $.ajax({
                     type: "POST",
                     url: "/game/creategame",
-                    data:getDataFromInputs(),
-                    success:function(){}                    
+                    data: getDataFromInputs(),
+                    success: function () { }
                 })
-          })
+            })
         })
     </script>
 }

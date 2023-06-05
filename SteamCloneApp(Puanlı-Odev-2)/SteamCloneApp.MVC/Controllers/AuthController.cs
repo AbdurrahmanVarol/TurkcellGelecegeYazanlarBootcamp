@@ -35,6 +35,7 @@ namespace SteamCloneApp.MVC.Controllers
                     new Claim(ClaimTypes.Name,user.FirstName),
                     new Claim("FullName",user.FullName)
                 };
+                claims.AddRange(user.Roles.Select(p => new Claim(ClaimTypes.Role, p)));
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var authenticationProperties = new AuthenticationProperties

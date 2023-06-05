@@ -1,0 +1,42 @@
+﻿@model NavbarViewModel
+
+<nav class="navbar navbar-expand-lg navbar-toggleable-lg bg-dark mb-3" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SteamCloneApp.MVC</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Mağaza</a>
+                </li>
+                @if (Model.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link " asp-area="" asp-controller="game" asp-action="library">Kütüphane</a>
+                    </li>
+                }
+                <li class="nav-item">
+                    <a id="cartButton" class="nav-link " asp-area="" asp-controller="cart" asp-action="cartdetail">Sepetim@(Model.CartItemCount == 0 ? "" : $"({Model.CartItemCount})")</a>
+                </li>
+
+                @if (Model.IsAuthenticated && Model.Roles.Any(p => p.Equals("Admin")))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link " asp-area="" asp-controller="game" asp-action="CreateGame">Oyun Ekle</a>
+                    </li>
+                }
+            </ul>
+            @if (Model.IsAuthenticated)
+            {
+                <a class="btn btn-danger" asp-area="" asp-controller="auth" asp-action="logout">Çıkış Yap</a>
+            }
+            else
+            {
+                <a class="btn btn-primary" asp-area="" asp-controller="auth" asp-action="login">Giriş Yap</a>
+            }
+        </div>
+    </div>
+</nav>

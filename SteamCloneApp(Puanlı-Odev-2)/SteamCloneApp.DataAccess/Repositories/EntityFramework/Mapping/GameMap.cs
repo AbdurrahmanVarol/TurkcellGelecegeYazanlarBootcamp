@@ -13,7 +13,7 @@ namespace SteamCloneApp.DataAccess.Repositories.EntityFramework.Mapping
     {
         public void Configure(EntityTypeBuilder<Game> builder)
         {
-            builder.HasKey(p => p.Id);
+            builder.HasKey(p => p.Id);          
 
             builder.Property(p => p.Id).HasDefaultValueSql("NEWID()");
 
@@ -21,6 +21,7 @@ namespace SteamCloneApp.DataAccess.Repositories.EntityFramework.Mapping
                 .WithOne(p => p.Game)
                 .HasForeignKey(p => p.GameId)
                 .OnDelete(DeleteBehavior.Restrict);
+
             builder.HasMany(p => p.Images)
                 .WithOne(p => p.Game)
                 .HasForeignKey(p => p.GameId)
@@ -31,7 +32,6 @@ namespace SteamCloneApp.DataAccess.Repositories.EntityFramework.Mapping
             builder.Navigation(p => p.PublishedBy).AutoInclude();
             builder.Navigation(p => p.Images).AutoInclude();
             builder.Navigation(p => p.Reviews).AutoInclude();
-
         }
     }
 }

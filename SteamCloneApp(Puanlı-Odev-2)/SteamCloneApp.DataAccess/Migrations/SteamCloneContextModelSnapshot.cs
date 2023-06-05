@@ -86,50 +86,6 @@ namespace SteamCloneApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Developers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Larian Studios is an independent RPG developer founded in 1996 in Gent, Belgium.",
-                            Name = "Larian Studios"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "FromSoftware, Inc. is established in Sasazuka, Shibuya-ku, Tokyo, for the development of business application software.",
-                            Name = "Fromsoftware"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "PlayStation Studios is home to the development of Sony Interactive Entertainment’s own outstanding and immersive games, including some of the most popular and critically acclaimed titles in entertainment history.",
-                            Name = "Santa Monica Studio"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "PlayStation Studios is home to the development of Sony Interactive Entertainment’s own outstanding and immersive games, including some of the most popular and critically acclaimed titles in entertainment history.",
-                            Name = "Guerrilla"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Description = "Ubisoft is a creator of worlds, committed to enriching players' lives with original and memorable gaming experiences.",
-                            Name = "Ubisoft Toronto"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Description = "Ubisoft is a creator of worlds, committed to enriching players' lives with original and memorable gaming experiences.",
-                            Name = "Ubisoft Quebec"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Description = "CD PROJEKT RED is a development studio founded in 2002. Our mission is to tell emotional stories riddled with meaningful choices and consequences, as well as featuring characters gamers can truly connect with.",
-                            Name = "CD PROJEKT RED"
-                        });
                 });
 
             modelBuilder.Entity("SteamCloneApp.Entities.Entities.Game", b =>
@@ -139,12 +95,20 @@ namespace SteamCloneApp.DataAccess.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
 
+                    b.Property<string>("CoverUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DevelopedById")
                         .HasColumnType("int");
+
+                    b.Property<string>("IconUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -183,58 +147,6 @@ namespace SteamCloneApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Aksiyon"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Basit Eğlence"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Bağımsız"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Devasa Çok Oyunculu"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Macera"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "RYO"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Simülasyon"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Spor"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Name = "Strateji"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Name = "Yarış"
-                        });
                 });
 
             modelBuilder.Entity("SteamCloneApp.Entities.Entities.Image", b =>
@@ -277,39 +189,7 @@ namespace SteamCloneApp.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Publisher");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Larian Studios is an independent RPG developer founded in 1996 in Gent, Belgium.",
-                            Name = "Larian Studios"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Bandai Namco exists to share dreams, fun and inspiration with people around the world. Do you wish to enjoy every single day to the fullest? What we want is for people like you to always have a reason to smile.",
-                            Name = "Bandai Namco Entertainment"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "PlayStation Studios is home to the development of Sony Interactive Entertainment’s own outstanding and immersive games, including some of the most popular and critically acclaimed titles in entertainment history.",
-                            Name = "PlayStation Studios"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Ubisoft is a creator of worlds, committed to enriching players' lives with original and memorable gaming experiences.",
-                            Name = "Ubisoft"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Description = "CD PROJEKT RED is a development studio founded in 2002. Our mission is to tell emotional stories riddled with meaningful choices and consequences, as well as featuring characters gamers can truly connect with.",
-                            Name = "CD PROJEKT RED"
-                        });
+                    b.ToTable("Publishers");
                 });
 
             modelBuilder.Entity("SteamCloneApp.Entities.Entities.Review", b =>
@@ -341,7 +221,7 @@ namespace SteamCloneApp.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Review");
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("SteamCloneApp.Entities.Entities.Role", b =>
@@ -359,18 +239,6 @@ namespace SteamCloneApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Admin"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Customer"
-                        });
                 });
 
             modelBuilder.Entity("SteamCloneApp.Entities.Entities.User", b =>
@@ -407,18 +275,6 @@ namespace SteamCloneApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("1f1d88b7-5090-4348-b98f-86af845b0650"),
-                            Email = "abdurrahman@gmail.com",
-                            FirstName = "Abdurrahman",
-                            LastName = "Varol",
-                            NickName = "abdurrahman",
-                            PasswordHash = "WMA4dhrMhW2ZW3+8wIlpzcew0pVATmgSq4WZ+tjmiOW1R09J5lKdcxR16RIT1ds44FjeYM0o+ksAeTzSX6aXZQ==",
-                            PasswordSalt = "8qjYoxBQ2SgvH7vcbDsPbus2YFpicja5cDbz9IL6hJIgS4gTgr5uq1ADDLy7GHsIEY+0otBju+h74HRuNuFnU25/HWCXOjdKqPlksusj7mNjAR6rk9K9Oy4s1wIySzCoy3xi205Kqhgb4NJ0UcryFCvT6G/9QDQ63A9NyNVQ8s0="
-                        });
                 });
 
             modelBuilder.Entity("GameGenre", b =>

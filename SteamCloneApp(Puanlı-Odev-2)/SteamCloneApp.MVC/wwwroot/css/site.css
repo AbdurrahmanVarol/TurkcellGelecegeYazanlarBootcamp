@@ -18,11 +18,25 @@ html {
 }
 
 body {
-    margin-bottom: 60px;
+    min-height:100vh;
     background-color: rgb(27, 40, 56);
     color: #efefef
 }
 
+#root {
+    min-height: 950px;
+    background-image: url('/images/bgDefault.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+    #root .container {
+        min-height: height: 98vh !important;
+        background-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 5px 50px rgba(0, 0, 0, 0.2);
+        /* backdrop-filter: blur(3px);*/
+    }
 .authContent {
     background-image: url('https://community.cloudflare.steamstatic.com/public/shared/images/joinsteam/new_login_bg_strong_mask.jpg');
     background-size: cover;

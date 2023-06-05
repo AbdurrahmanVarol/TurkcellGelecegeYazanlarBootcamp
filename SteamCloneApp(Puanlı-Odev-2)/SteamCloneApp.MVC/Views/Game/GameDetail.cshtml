@@ -29,9 +29,9 @@
         </div>
     </div>
     <div class="col-4">
-        <img src=@Model.Images.FirstOrDefault() class="card-img-top mb-3" alt="Kapak resmi">
+        <img src=@Model.CoverUrl class="card-img-top mb-3" alt="Kapak resmi">
         <p class="card-text mb-2">@Model.Description</p>
-        <p class="card-text mb-1">ÇIKIŞ TARİHİ: @Model.DeveloperName</p>
+        <p class="card-text mb-1">ÇIKIŞ TARİHİ: @Model.ReleaseAt</p>
         <p class="card-text mb-1">GELİŞTİRİCİ: @Model.DeveloperName</p>
         <p class="card-text mb-1">YAYINCI: @Model.PublisherName</p>
         <p>
@@ -111,7 +111,7 @@
             const myCarouselElement = document.querySelector('#carouselExampleAutoplaying')
 
             const carousel = new bootstrap.Carousel(myCarouselElement, {
-                interval: 3000,
+                interval: 2500,
                 touch: false
             })
 

@@ -12,6 +12,8 @@ namespace SteamCloneApp.Business.Services
     {
         Task AddAsync(CreateGameRequest request);
         Task<List<GameDisplayResponse>> GetAllAsync();
+        Task<List<GameDisplayResponse>> GetGamesByUserIdAsync(Guid userId);
         Task<GameDisplayResponse> GetGameByIdAsync(Guid id);
+        Task<GameCartResponse> GetGameByIdForCartAsync(Guid id);
     }
 }

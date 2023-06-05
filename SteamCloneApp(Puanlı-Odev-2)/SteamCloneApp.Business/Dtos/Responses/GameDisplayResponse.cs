@@ -14,6 +14,8 @@ namespace SteamCloneApp.Business.Dtos.Responses
         public string Description { get; set; }
         public DateTime ReleaseAt { get; set; }
         public decimal Price { get; set; }
+        public string IconUrl { get; set; }
+        public string CoverUrl { get; set; }
         public string PublisherName { get; set; }
         public string DeveloperName { get; set; }
         public List<string> Genres { get; set; }

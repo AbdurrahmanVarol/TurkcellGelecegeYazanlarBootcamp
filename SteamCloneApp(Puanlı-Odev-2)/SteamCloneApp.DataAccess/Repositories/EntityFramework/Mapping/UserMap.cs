@@ -25,12 +25,9 @@ namespace SteamCloneApp.DataAccess.Repositories.EntityFramework.Mapping
                 .HasForeignKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            //password:12345
-            var passwordSalt = "8qjYoxBQ2SgvH7vcbDsPbus2YFpicja5cDbz9IL6hJIgS4gTgr5uq1ADDLy7GHsIEY+0otBju+h74HRuNuFnU25/HWCXOjdKqPlksusj7mNjAR6rk9K9Oy4s1wIySzCoy3xi205Kqhgb4NJ0UcryFCvT6G/9QDQ63A9NyNVQ8s0=";
-            var passwordHash = "WMA4dhrMhW2ZW3+8wIlpzcew0pVATmgSq4WZ+tjmiOW1R09J5lKdcxR16RIT1ds44FjeYM0o+ksAeTzSX6aXZQ==";
-            builder.HasData(
-                    new User { Id = Guid.NewGuid(), FirstName = "Abdurrahman", LastName = "Varol", Email = "abdurrahman@gmail.com", NickName = "abdurrahman", PasswordSalt = passwordSalt, PasswordHash = passwordHash}
-                    );
+            builder.Navigation(p => p.Roles).AutoInclude();
+
+           
         }
     }
 }

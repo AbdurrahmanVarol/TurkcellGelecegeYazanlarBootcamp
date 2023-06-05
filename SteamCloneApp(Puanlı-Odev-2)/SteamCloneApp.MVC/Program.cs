@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SteamCloneApp.Business;
 using SteamCloneApp.DataAccess;
 using SteamCloneApp.DataAccess.Repositories.EntityFramework.Contexts;
+using SteamCloneApp.DataAccess.Repositories.EntityFramework.Seeding;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +19,11 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
         option.AccessDeniedPath = "/auth/accessdenied";
     });
+
+builder.Services.AddSession(opt =>
+{
+    opt.IdleTimeout = TimeSpan.FromMinutes(15);
+});
 
 
 builder.Services.LoadBusiness();
@@ -39,6 +45,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseSession();
+
 app.UseAuthentication();
 
 app.UseAuthorization();
@@ -47,9 +55,10 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-using (var scope = app.Services.GetService<IServiceScopeFactory>()?.CreateScope())
-{
-    scope?.ServiceProvider.GetRequiredService<SteamCloneContext>().Database.Migrate();
-}
+using var scope = app.Services.GetService<IServiceScopeFactory>()?.CreateScope();
+var services = scope.ServiceProvider;
+var context = services.GetRequiredService<SteamCloneContext>();
+context.Database.EnsureCreated();
+EfDbSeeding.SeedDatabase(context);
 
 app.Run();

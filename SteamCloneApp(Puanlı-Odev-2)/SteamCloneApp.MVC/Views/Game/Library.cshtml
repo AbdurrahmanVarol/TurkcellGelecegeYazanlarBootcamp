@@ -1,0 +1,28 @@
+﻿@model List<GameDisplayResponse>
+@{
+    ViewData["Title"] = "Library";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Library</h1>
+
+<div class="row" style="height:900px;">
+    <div class="col-4 p-3" style="background-color:rgb(36, 40, 47);">
+        @foreach (var game in Model)
+        {
+            <div class="row mb-3" style="height: fit-content;" onclick="redirectToDetails('@game.Id')">
+                <div class="row">
+                    <div class="col-md-2 p-0 m-0">
+                        <img src=@game.CoverUrl class="img-fluid rounded-start" alt="resim" style="max-height:100%;max-width:100%;">
+                    </div>
+                    <div class="col-md-9">
+                        <h6 class="card-title">@game.Title</h6>
+                    </div>
+                </div>             
+            </div>
+        }
+    </div>
+    <div class="col-7 bg-secondary">
+    </div>
+</div>
+

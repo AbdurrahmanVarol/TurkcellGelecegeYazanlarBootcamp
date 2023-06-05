@@ -21,6 +21,7 @@ namespace SteamCloneApp.DataAccess
             services.AddDbContext<SteamCloneContext>(option =>
             {
                 option.UseSqlServer(connectionString);
+               
             });
 
             services.AddScoped<IUserRepository, EfUserRepository>();

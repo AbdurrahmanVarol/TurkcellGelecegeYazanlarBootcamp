@@ -1,0 +1,83 @@
+﻿@model IEnumerable<GameCartResponse>
+@{
+    ViewData["Title"] = "CartDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (!Model.Any())
+{
+    <h1>Sepette heniz bir oyun bulunamadı!</h1>
+}
+else
+{
+    <ul id="cartList">
+        @foreach(var game in Model)
+        {
+            <li data-gameId=@game.Id><span>@game.Title</span>----<span>@game.Price</span><button class="badge bg-danger" onclick="removeFromCart(event)">X</button></li>
+        }
+    </ul>
+    <button onclick="purchase()">Satın Al</button>
+}
+@section Scripts{
+    <script>
+        const getListItemAsString = (item) =>{
+            return ` <li data-gameId=${item.id}><span>${item.title}</span>----<span>${item.price}</span><button class="badge bg-danger" onclick = "removeFromCart(event)">X</button></li >
+            `
+        }
+        const removeFromCart = (event) => {
+            event.cancelBubble = true;
+            const gameId = event.target.parentNode.dataset.gameid
+          
+            let data = {
+                GameId: gameId
+            }
+            fetch('/cart/removeFromCart', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    document.getElementById('cartButton').innerText = `Sepetim${data.length >= 1 ? '(' + data.length + ')' : ''}`
+                    let cartList = document.getElementById('cartList')
+                    cartList.innerHTML = ""
+                    let html = ``
+                    for(let item of data){
+                        html+=getListItemAsString(item)
+                    }
+                    cartList.innerHTML = html
+                })
+        }
+        const purchase = () =>{
+            let listItems = [...document.querySelectorAll('#cartList li')]
+            console.log(listItems)
+            if(listItems.length == 0){
+                return
+            }
+            let gameIds = listItems.map(p=>p.dataset.gameid)
+            let data = {
+                gameIds
+            }
+            console.log(data)
+            fetch('/game/PurchaseGame', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    document.getElementById('cartButton').innerText = `Sepetim${data.length >= 1 ? '(' + data.length + ')' : ''}`
+                    let cartList = document.getElementById('cartList')
+                    cartList.innerHTML = ""
+                })
+        }
+        
+    </script>
+}
+

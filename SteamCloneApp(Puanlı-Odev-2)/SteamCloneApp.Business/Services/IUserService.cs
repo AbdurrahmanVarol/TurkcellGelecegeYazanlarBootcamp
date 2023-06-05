@@ -1,4 +1,5 @@
-﻿using SteamCloneApp.Entities.Entities;
+﻿using SteamCloneApp.Business.Dtos.Requests;
+using SteamCloneApp.Entities.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace SteamCloneApp.Business.Services
     {
         Task<User> GetUserByNickNameAsync(string nickName);
         Task AddAsync(User user);
+        Task AddGameToUser(PurchaseGameRequest purchaseGameRequest);
     }
 }
