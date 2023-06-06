@@ -4,6 +4,7 @@ using SteamCloneApp.Business;
 using SteamCloneApp.DataAccess;
 using SteamCloneApp.DataAccess.Repositories.EntityFramework.Contexts;
 using SteamCloneApp.DataAccess.Repositories.EntityFramework.Seeding;
+using SteamCloneApp.MVC.Middlewares;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,6 +40,9 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
+app.UseMiddleware<NotFoundMiddleware>();
+
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
@@ -51,9 +55,11 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
 using var scope = app.Services.GetService<IServiceScopeFactory>()?.CreateScope();
 var services = scope.ServiceProvider;
