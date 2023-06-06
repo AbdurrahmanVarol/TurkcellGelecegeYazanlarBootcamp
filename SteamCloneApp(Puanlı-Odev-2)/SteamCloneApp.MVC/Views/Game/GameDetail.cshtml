@@ -76,28 +76,38 @@
 
 <div class="reviews">
     <h4>İncelemeler</h4>
-    @foreach (var review in Model.Reviews)
+    @if (!Model.Reviews.Any())
     {
-        <div class="row mb-3 review">
-            <div class="col-2 bg-dark">aa</div>
-            <div class="col-9 ms-2">
-                <div>
-                    @if (review.IsRecommend)
-                    {
-                        <p><span class="text-info">OK</span> TAVSİYE Ediliyor </p>
-
-
-                    }
-                    else
-                    {
-                        <p><span class="text-danger">BAD</span> TAVSİYE EDİLMİYOR </p>
-
-                    }
+        <h4 class="text-light">
+            Bu oyuna henüz bir inceleme girilmemiş.
+            @if (ViewBag.IsAuthenticated == null && !ViewBag.IsAuthenticated)
+            {
+                <span><strong><a asp-action="login" asp-controller="auth">Giriş Yaparak</a></strong> bu oyuna bir inceleme yazabilirsiniz.</span>
+            }
+        </h4>
+    }
+    else
+    {
+        @foreach (var review in Model.Reviews)
+        {
+            <div class="row mb-3 review">
+                <div class="col-2 bg-dark">aa</div>
+                <div class="col-9 ms-2">
+                    <div class="p-2">
+                        @if (review.IsRecommend)
+                        {
+                            <span><span class="text-info"><img src="https://store.akamai.steamstatic.com/public/shared/images/userreviews/icon_thumbsUp_v6.png" /></span> TAVSİYE EDİLİYOR </span>
+                        }
+                        else
+                        {
+                            <span><span class="text-info"><img src=" https://store.akamai.steamstatic.com/public/shared/images/userreviews/icon_thumbsDown_v6.png" /></span> TAVSİYE EDİLMİYOR </span>
+                        }
+                    </div>
+                    <p>Tarih: @review.PostedAt</p>
+                    <p>@review.Post</p>
                 </div>
-                <p>Tarih: @review.PostedAt</p>
-                <p>@review.Post</p>
             </div>
-        </div>
+        }
     }
 
 </div>

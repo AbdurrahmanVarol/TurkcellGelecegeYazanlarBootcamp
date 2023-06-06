@@ -17,13 +17,14 @@ namespace SteamCloneApp.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string? returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginRequest loginRequest)
+        public async Task<IActionResult> Login(LoginRequest loginRequest, string? returnUrl)
         {
             try
             {
@@ -45,7 +46,11 @@ namespace SteamCloneApp.MVC.Controllers
                 };
 
                 await HttpContext.SignInAsync(new ClaimsPrincipal(claimsIdentity), authenticationProperties);
-                return RedirectToAction("index", "home");
+                if (string.IsNullOrWhiteSpace(returnUrl))
+                {
+                    return RedirectToAction("index", "home");
+                }
+                return Redirect(returnUrl);
             }
             catch (Exception exception)
             {

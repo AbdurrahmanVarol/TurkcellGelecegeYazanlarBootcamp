@@ -1,7 +1,7 @@
 ﻿@model LoginRequest
 @{
     ViewData["Title"] = "Login";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }
 <div class="authContent">
     <h1 class="text-center text-light mb-4">Giriş Yap</h1>
@@ -12,22 +12,37 @@
         </div>
     }
     <div class="p-2 alert-danger" asp-validation-summary="ModelOnly"></div>
-    <form asp-action="login" asp-controller="auth" method="post">
-        <div class="mb-3 form-group">
-            <input class="form-control" asp-for="@(Model.NickName)" placeholder="Kullanıcı adınızı girin">
-        </div>
-        <div class="mb-3 form-group">
-            <input class="form-control" asp-for="@(Model.Password)" type="password" placeholder="Şifrenizi girin">
-        </div>
-        <div class="mb-3 form-check">
-            <input class="form-check-input" asp-for="IsKeepLoggedIn">
-            <label class="form-check-label text-light" asp-for="IsKeepLoggedIn">Beni hatırla</label>
-        </div>
-        <div class="text-right">
-            <button style="float: right;" type="submit" class="btn btn-success">Giriş Yap</button>
-        </div>
-    </form>
+<div class="row">
+    <div class="col-7">
+            <form asp-action="login" asp-controller="auth" method="post" asp-route-returnUrl="@ViewBag.ReturnUrl">
+                <div class="mb-3 form-group">
+                    <label class="mb-1" style="color:rgb(25, 153, 255);" asp-for="@(Model.NickName)">HESAP ADI İLE GİRİŞ YAP</label>
+                    <input asp-for="@(Model.NickName)" placeholder="Kullanıcı adınızı girin">
+                </div>
+                <div class="mb-3 form-group">
+                    <label class="mb-1 text-dark-emphasis" asp-for="@(Model.NickName)">PAROLA</label>
+                    <input asp-for="@(Model.Password)" type="password" placeholder="Şifrenizi girin">
+                </div>
+                <div class="mb-3 form-check">
+                    <input class="form-check-input" asp-for="IsKeepLoggedIn">
+                    <label class="form-check-label text-light" asp-for="IsKeepLoggedIn">Beni hatırla</label>
+                </div>
+                <div class="text-center mb-5">
+                    <button style="background-color:rgb(38, 128, 255);" type="submit" class="btn text-light w-50">Giriş Yap</button>
+                </div>
+            </form>
+    </div>
+    <div class="col-4 p-0">
+            <span class="mb-2" style="color:rgb(25, 153, 255);">Veya QR kodu ile giriş yapın</span>
+           <div class="mb-2">
+                <img src="~/İmages/loginqr.svg" class="img-fluid rounded" alt="resim" style="max-height:100%;max-width:100%;" />
+           </div>
+           <div>
+                <span class="text-dark-emphasis">QR koduyla giriş yapmak için<a class="text-dark-emphasis" href="#">Steam mobil uygulamasını</a>kullanın</span>
+           </div>
+    </div>
+</div>
     <div class="links">
-        <strong class="text-light">Hesabınız yok mu?</strong><a asp-action="register" asp-controller="auth"><strong>Kayıt Ol</strong></a>
+        <strong class="text-dark-emphasis">Hesabınız yok mu? </strong><a class="text-dark-emphasis" asp-action="register" asp-controller="auth"><strong>Kayıt Ol</strong></a>
     </div>
 </div>

@@ -1,8 +1,10 @@
 ﻿@model NavbarViewModel
 
-<nav class="navbar navbar-expand-lg navbar-toggleable-lg bg-dark mb-3" data-bs-theme="dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SteamCloneApp.MVC</a>
+<nav class="navbar navbar-expand-lg navbar-toggleable-lg bg-dark" data-bs-theme="dark" style="background-color:rgb(24, 26, 33)!important;">
+    <div class="container">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+            <img src="https://store.akamai.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016" />
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -26,6 +28,9 @@
                 {
                     <li class="nav-item">
                         <a class="nav-link " asp-area="" asp-controller="game" asp-action="CreateGame">Oyun Ekle</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " asp-area="" asp-controller="game" asp-action="modify">Oyun Düzenle</a>
                     </li>
                 }
             </ul>

@@ -7,11 +7,24 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
-
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Yeni ve Popüler</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link disabled text-light" href="#">Çok Satanlar</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link disabled text-light" href="#">Popüler ve Yakında</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link disabled text-light">Özel Fırsatlar</a>
+    </li>
+</ul>
 <div id="games">
     @foreach (var game in Model)
     {
-        <div class="gameCard row mb-3" onclick="redirectToDetails('@game.Id')" >
+        <div class="gameCard row mb-3" onclick="redirectToDetails('@game.Id')">
             <div class="card">
                 <div class="row">
                     <div class="col-md-4 p-0 m-0">
@@ -34,7 +47,6 @@
                                         }
                                     </div>
                                     <small class="text-body-secondary">
-                                      
                                     </small>
                                 </p>
                             </div>
@@ -56,25 +68,25 @@
             window.location.href = '/game/gamedetail/' + id;
         }
 
-        const addToCart = (event) =>{
+        const addToCart = (event) => {
             event.cancelBubble = true;
             const gameId = event.target.dataset.gameid
             let data = {
-                GameId : gameId
+                GameId: gameId
             }
             console.log(gameId)
             console.log(JSON.stringify({ gameId }))
-            fetch('/cart/addtocart',{
-                method:"POST",
+            fetch('/cart/addtocart', {
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(data)
             })
-            .then(response => response.json())
-            .then(data=>{
-               document.getElementById('cartButton').innerText = `Sepetim(${data.count})`
-            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('cartButton').innerText = `Sepetim(${data.count})`
+                })
         }
     </script>
 }

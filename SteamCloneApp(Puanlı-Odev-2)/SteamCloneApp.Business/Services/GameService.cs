@@ -31,15 +31,15 @@ namespace SteamCloneApp.Business.Services
                 Description = request.Description,
                 DevelopedById = request.DevelopedById,
                 PublishedById = request.PublishedById,
-                ReleaseAt = request.ReleaseAt,    
+                ReleaseAt = request.ReleaseAt,
                 CoverUrl = request.CoverUrl,
                 IconUrl = request.IconUrl,
                 Title = request.Title,
                 Price = request.Price,
-                Genres = genres                
-            };            
+                Genres = genres
+            };
             await _gameRepository.AddAsync(game);
-            foreach(var imageUrl in request.ImageUrls)
+            foreach (var imageUrl in request.ImageUrls)
             {
                 await _imageRepository.AddAsync(new Image
                 {
@@ -65,13 +65,13 @@ namespace SteamCloneApp.Business.Services
                 CoverUrl = p.CoverUrl,
                 IconUrl = p.IconUrl,
                 Genres = p.Genres.Select(p => p.Name).ToList(),
-                Images = p.Images.Select(p => p.ImageUrl).ToList()              
-            }).ToList();
+                Images = p.Images.Select(p => p.ImageUrl).ToList()
+            }).OrderByDescending(p => p.ReleaseAt).ToList();
         }
         public async Task<List<GameDisplayResponse>> GetGamesByUserIdAsync(Guid userId)
         {
 
-            var games = await _gameRepository.GetAllAsync(g=>g.Users.Any(u=>u.Id == userId));
+            var games = await _gameRepository.GetAllAsync(g => g.Users.Any(u => u.Id == userId));
 
             return games.Select(p => new GameDisplayResponse
             {
@@ -90,8 +90,8 @@ namespace SteamCloneApp.Business.Services
         }
         public async Task<GameDisplayResponse> GetGameByIdAsync(Guid id)
         {
-            var game = await _gameRepository.GetAsync(p=>p.Id == id);
-            if(game is null)
+            var game = await _gameRepository.GetAsync(p => p.Id == id);
+            if (game is null)
             {
                 throw new ArgumentNullException("---------");
             }
@@ -101,8 +101,8 @@ namespace SteamCloneApp.Business.Services
                 Description = game.Description,
                 Title = game.Title,
                 Price = game.Price,
-                IconUrl= game.IconUrl,
-                CoverUrl= game.CoverUrl,
+                IconUrl = game.IconUrl,
+                CoverUrl = game.CoverUrl,
                 ReleaseAt = game.ReleaseAt,
                 DeveloperName = game.DevelopedBy.Name,
                 PublisherName = game.PublishedBy.Name,
@@ -123,20 +123,19 @@ namespace SteamCloneApp.Business.Services
 
         public async Task<GameCartResponse> GetGameByIdForCartAsync(Guid id)
         {
-            var game = await _gameRepository.GetAsync(p=>p.Id == id);
-            if(game is null)
+            var game = await _gameRepository.GetAsync(p => p.Id == id);
+            if (game is null)
             {
                 throw new ArgumentNullException("---------");
             }
             var response = new GameCartResponse
             {
-                Id = game.Id,               
+                Id = game.Id,
                 Title = game.Title,
-                Price = game.Price              
+                Price = game.Price,
+                CoverUrl = game.CoverUrl
             };
             return response;
         }
-
-       
     }
 }

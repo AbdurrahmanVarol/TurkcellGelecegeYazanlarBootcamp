@@ -10,23 +10,59 @@
 }
 else
 {
-    <ul id="cartList">
+    <h1>ALIŞVERİŞ SEPETİNİZ</h1>
+    <div id="cartList">
         @foreach(var game in Model)
         {
-            <li data-gameId=@game.Id><span>@game.Title</span>----<span>@game.Price</span><button class="badge bg-danger" onclick="removeFromCart(event)">X</button></li>
+            <div class="row mb-3" style="height: fit-content;" onclick="redirectToDetails('@game.Id')">
+                <div class="d-flex">
+                    <div class="w-25 p-0 m-0">
+                        <img src=@game.CoverUrl class="img-fluid rounded-start" alt="resim" style="max-height:100%;max-width:100%;">
+                    </div>
+                    <div class="w-50 p-2">
+                        <h6 class="card-title">@game.Title</h6>
+                    </div>                    
+                    <div class="float-end d-flex flex-column">
+                        <span class="text-success mb-2">@(game.Price) TL</span>
+                        <button class="badge bg-danger" style="height:30px;" onclick="removeFromCart(event)">Kaldır</button>
+                    </div>
+                </div>
+            </div>
         }
-    </ul>
-    <button onclick="purchase()">Satın Al</button>
+    </div>
+    <div class="w-75 mb-3">
+        <span>Hesaplanan tutar</span><span id="totalPrice" class="float-end">@Model.DefaultIfEmpty().Sum(p=>p.Price) TL</span>
+    </div>
+
+    <button class="btn btn-success" onclick="purchase()">Satın Al</button>
 }
 @section Scripts{
     <script>
+        const redirectToDetails = (id) => {
+            window.location.href = '/game/gamedetail/' + id;
+        }
+
         const getListItemAsString = (item) =>{
-            return ` <li data-gameId=${item.id}><span>${item.title}</span>----<span>${item.price}</span><button class="badge bg-danger" onclick = "removeFromCart(event)">X</button></li >
-            `
+            return `
+                             <div class="row mb-3" style="height: fit-content;" onclick="redirectToDetails('${item.id}')">
+                        <div class="d-flex">
+                            <div class="w-25 p-0 m-0">
+                                                <img src=${item.coverUrl} class="img-fluid rounded-start" alt="resim" style="max-height:100%;max-width:100%;">
+                            </div>
+                            <div class="w-50 p-2">
+                                                <h6 class="card-title">${item.title}</h6>
+                            </div>
+                            <div class="float-end d-flex flex-column">
+                                        <span class="text-success mb-2">${item.price} TL</span>
+                                        <button class="badge bg-danger" style="height:30px;" data-gameId=${item.id} onclick="removeFromCart(event)">Kaldır</button>
+                            </div>
+                        </div>
+                   </div>            
+            `         
         }
         const removeFromCart = (event) => {
             event.cancelBubble = true;
-            const gameId = event.target.parentNode.dataset.gameid
+            const gameId = event.target.dataset.gameid
           
             let data = {
                 GameId: gameId
@@ -43,12 +79,18 @@ else
                     console.log(data)
                     document.getElementById('cartButton').innerText = `Sepetim${data.length >= 1 ? '(' + data.length + ')' : ''}`
                     let cartList = document.getElementById('cartList')
+                    let totalPrice = document.getElementById('totalPrice')
                     cartList.innerHTML = ""
+                    totalPrice.innerText = ""
                     let html = ``
+                    let total = 0
                     for(let item of data){
                         html+=getListItemAsString(item)
+                        total += item.price
                     }
                     cartList.innerHTML = html
+                    totalPrice.innerText = `${total} TL`
+
                 })
         }
         const purchase = () =>{

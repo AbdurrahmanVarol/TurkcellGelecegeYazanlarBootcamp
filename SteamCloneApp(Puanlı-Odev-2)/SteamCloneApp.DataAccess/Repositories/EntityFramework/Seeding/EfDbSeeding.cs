@@ -76,9 +76,61 @@ namespace SteamCloneApp.DataAccess.Repositories.EntityFramework.Seeding
                             Price = 799.00M,
                             PublishedById = 5,
                             DevelopedById = 7,
-                            ReleaseAt = DateTime.Now,
+                            ReleaseAt = DateTime.Parse("10.12.2020"),
                             IconUrl = "",
                             CoverUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg?t=1680026109",
+                            Genres = genres.Where(p=>p.Name.Equals("Aksiyon")|| p.Name.Equals("Macera")).ToList()
+                        },
+                        new Game
+                        {
+                            Id = Guid.Parse("d33df182-d821-473f-b20b-7f6b3cace514"),
+                            Title = "Detroit: Become Human",
+                            Description = "Detroit: Become Human sizi makinelerin insanlardan daha akıllı olduğu bir yakın geleceğe taşıyor. Şimdiye kadar oluşturulan hikayeler arasında en fazla dallara ayrılanlardan biri olan bu hikayede, vereceğiniz her karar oyunun sonucunu etkileyecek.",
+                            Price = 470.00M,
+                            PublishedById = 6,
+                            DevelopedById = 8,
+                            ReleaseAt = DateTime.Parse("18.06.2020"),
+                            IconUrl = "",
+                            CoverUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1222140/header.jpg?t=1667468479",
+                            Genres = genres.Where(p=>p.Name.Equals("Aksiyon")|| p.Name.Equals("Macera")).ToList()
+                        },
+                        new Game
+                        {
+                            Id = Guid.Parse("e07c0e1c-7ea0-4cbf-87c1-6def3629fd04"),
+                            Title = "Dying Light 2 Stay Human",
+                            Description = "Virüs kazandı ve medeniyet Karanlık Çağ'a geri döndü. İnsanlığın son yerleşkelerinden biri olan Şehir, yıkılmanın eşiğinde. Hayatta kalmak için çevikliğini ve dövüş yeteneklerini kullan ve dünyayı yeniden şekillendir. Seçimlerin herkesin kaderini belirleyecek.",
+                            Price = 349.00M,
+                            PublishedById = 7,
+                            DevelopedById = 9,
+                            ReleaseAt = DateTime.Parse("04.02.2022"),
+                            IconUrl = "",
+                            CoverUrl = "https://cdn.akamai.steamstatic.com/steam/apps/534380/header_alt_assets_18_turkish.jpg?t=1685707337",
+                            Genres = genres.Where(p=>p.Name.Equals("Aksiyon")|| p.Name.Equals("Macera")).ToList()
+                        },
+                        new Game
+                        {
+                            Id = Guid.Parse("908df1f1-b615-4e5e-8beb-6264b7fd6e49"),
+                            Title = "Dying Light",
+                            Description = "Et peşindeki zombilerin istila ettiği açık dünyada, kıyamet sonrası dönemde geçen, birinci şahıs aksiyon hayatta kalma oyunu. Gizemli bir virüs salgınıyla perişan olmuş şehri keşfet. Erzak ara, silah üret ve marazlı ordularıyla çarpış.",
+                            Price = 59.00M,
+                            PublishedById = 7,
+                            DevelopedById = 9,
+                            ReleaseAt = DateTime.Parse("26.01.2015"),
+                            IconUrl = "",
+                            CoverUrl = "https://cdn.akamai.steamstatic.com/steam/apps/239140/header.jpg?t=1674129492",
+                            Genres = genres.Where(p=>p.Name.Equals("Aksiyon")|| p.Name.Equals("Macera")).ToList()
+                        },
+                        new Game
+                        {
+                            Id = Guid.Parse("c1c4daa3-1cc7-4f1a-8cd8-41de0726c8ad"),
+                            Title = "God of War",
+                            Description = "Olimpos Tanrılarından aldığı intikamın üzerinden yıllar geçen Kratos, artık İskandinav Tanrılarının ve canavarlarının diyarında sıradan bir insan olarak yaşıyor. Bu sert ve acımasız dünyada hayatta kalabilmek için savaşmak ve oğluna da aynısını öğretmek zorunda.",
+                            Price = 329.00M,
+                            PublishedById = 3,
+                            DevelopedById = 3,
+                            ReleaseAt = DateTime.Parse("14.01.2022"),
+                            IconUrl = "",
+                            CoverUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1593500/header.jpg?t=1650554420",
                             Genres = genres.Where(p=>p.Name.Equals("Aksiyon")|| p.Name.Equals("Macera")).ToList()
                         }
                     };
@@ -119,7 +171,9 @@ namespace SteamCloneApp.DataAccess.Repositories.EntityFramework.Seeding
                       new Developer { Name = "Guerrilla", Description = "PlayStation Studios is home to the development of Sony Interactive Entertainment’s own outstanding and immersive games, including some of the most popular and critically acclaimed titles in entertainment history." },
                       new Developer { Name = "Ubisoft Toronto", Description = "Ubisoft is a creator of worlds, committed to enriching players' lives with original and memorable gaming experiences." },
                       new Developer { Name = "Ubisoft Quebec", Description = "Ubisoft is a creator of worlds, committed to enriching players' lives with original and memorable gaming experiences." },
-                      new Developer { Name = "CD PROJEKT RED", Description = "CD PROJEKT RED is a development studio founded in 2002. Our mission is to tell emotional stories riddled with meaningful choices and consequences, as well as featuring characters gamers can truly connect with." }
+                      new Developer { Name = "CD PROJEKT RED", Description = "CD PROJEKT RED is a development studio founded in 2002. Our mission is to tell emotional stories riddled with meaningful choices and consequences, as well as featuring characters gamers can truly connect with." },
+                      new Developer { Name = "Quantic Dream", Description = "Quantic Dream is an award-winning French video game developer and publisher founded to create AAA games with a focus on emotional, interactive storytelling and innovation in narrative." },
+                      new Developer { Name = "Techland", Description = "Creator and publisher of Dying Light and Call of Juarez franchises." },
                 };
                 context.Developers.AddRange(developers);
                 context.SaveChanges();
@@ -131,11 +185,13 @@ namespace SteamCloneApp.DataAccess.Repositories.EntityFramework.Seeding
             {
                 var publishers = new List<Publisher>()
                 {
-                    new Publisher {Name = "Larian Studios", Description = "Larian Studios is an independent RPG developer founded in 1996 in Gent, Belgium." },
-                    new Publisher {Name = "Bandai Namco Entertainment", Description = "Bandai Namco exists to share dreams, fun and inspiration with people around the world. Do you wish to enjoy every single day to the fullest? What we want is for people like you to always have a reason to smile." },
-                    new Publisher {Name = "PlayStation Studios", Description = "PlayStation Studios is home to the development of Sony Interactive Entertainment’s own outstanding and immersive games, including some of the most popular and critically acclaimed titles in entertainment history." },
-                    new Publisher {Name = "Ubisoft", Description = "Ubisoft is a creator of worlds, committed to enriching players' lives with original and memorable gaming experiences." },
-                    new Publisher {Name = "CD PROJEKT RED", Description = "CD PROJEKT RED is a development studio founded in 2002. Our mission is to tell emotional stories riddled with meaningful choices and consequences, as well as featuring characters gamers can truly connect with." }
+                    new Publisher { Name = "Larian Studios", Description = "Larian Studios is an independent RPG developer founded in 1996 in Gent, Belgium." },
+                    new Publisher { Name = "Bandai Namco Entertainment", Description = "Bandai Namco exists to share dreams, fun and inspiration with people around the world. Do you wish to enjoy every single day to the fullest? What we want is for people like you to always have a reason to smile." },
+                    new Publisher { Name = "PlayStation Studios", Description = "PlayStation Studios is home to the development of Sony Interactive Entertainment’s own outstanding and immersive games, including some of the most popular and critically acclaimed titles in entertainment history." },
+                    new Publisher { Name = "Ubisoft", Description = "Ubisoft is a creator of worlds, committed to enriching players' lives with original and memorable gaming experiences." },
+                    new Publisher { Name = "CD PROJEKT RED", Description = "CD PROJEKT RED is a development studio founded in 2002. Our mission is to tell emotional stories riddled with meaningful choices and consequences, as well as featuring characters gamers can truly connect with." },
+                    new Publisher { Name = "Quantic Dream", Description = "Quantic Dream is an award-winning French video game developer and publisher founded to create AAA games with a focus on emotional, interactive storytelling and innovation in narrative." },
+                    new Publisher { Name = "Techland Publishing", Description = "Creator and publisher of Dying Light and Call of Juarez franchises." }
                 };
                 context.Publishers.AddRange(publishers);
                 context.SaveChanges();
@@ -147,7 +203,7 @@ namespace SteamCloneApp.DataAccess.Repositories.EntityFramework.Seeding
             {
                 var roles = new List<Role>()
                 {
-                      new Role {Name = "Admin" },
+                    new Role {Name = "Admin" },
                     new Role {Name = "Customer" }
                 };
                 context.Roles.AddRange(roles);
@@ -165,7 +221,18 @@ namespace SteamCloneApp.DataAccess.Repositories.EntityFramework.Seeding
                 var roles = context.Roles;
 
                 var users = new List<User>() {
-                        new User { FirstName = "Abdurrahman", LastName = "Varol", Email = "abdurrahman@gmail.com", NickName = "abdurrahman", PasswordSalt = passwordSalt, PasswordHash = passwordHash,Roles = roles.Where(p=>p.Name.Equals("Admin")|| p.Name.Equals("Customer")).ToList() }
+                        new User 
+                        { 
+                            FirstName = "Abdurrahman", 
+                            LastName = "Varol", 
+                            Email = "abdurrahman@gmail.com",
+                            NickName = "abdurrahman", 
+                            PasswordSalt = passwordSalt,
+                            PasswordHash = passwordHash,
+                            Roles = roles.Where(p=>p.
+                            Name.Equals("Admin")|| p.
+                            Name.Equals("Customer")).ToList() 
+                        }
                         };
                 context.Users.AddRange(users);
                 context.SaveChanges();
@@ -177,15 +244,15 @@ namespace SteamCloneApp.DataAccess.Repositories.EntityFramework.Seeding
             {
                 var images = new List<Image>()
             {
-                        new Image {ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/ss_387896248b42a15239a9256844b3e4bff72fbc2a.1920x1080.jpg?t=1681730384", GameId = Guid.Parse("5bfbf07a-6e1b-42d7-aef0-07bf212fac0a") },
-                        new Image {ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/ss_541756ab775d679957dca1e7d249c91a8f5d1ddd.1920x1080.jpg?t=1681730384", GameId = Guid.Parse("5bfbf07a-6e1b-42d7-aef0-07bf212fac0a") },
-                        new Image {ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/ss_85016b8787e589e9f01046d9f01b7de265c90212.1920x1080.jpg?t=1681730384", GameId = Guid.Parse("5bfbf07a-6e1b-42d7-aef0-07bf212fac0a") },
-                        new Image {ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/ss_82ef22724be56337ec220fcc287b93fa9bbb01fb.1920x1080.jpg?t=1681730384", GameId = Guid.Parse("5bfbf07a-6e1b-42d7-aef0-07bf212fac0a") },
-                        new Image {ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/ss_c81bd3bb9b2a3dd26b2dfd4ae3b8cd19331f4263.1920x1080.jpg?t=1681730384", GameId = Guid.Parse("5bfbf07a-6e1b-42d7-aef0-07bf212fac0a") },
-                        new Image {ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/ss_c3ff3176af9e155e1a240b0ff47d34d4d3a86644.1920x1080.jpg?t=1681730384", GameId = Guid.Parse("5bfbf07a-6e1b-42d7-aef0-07bf212fac0a") },
-                        new Image {ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/ss_fbc86702c8ea7ba4ac8bcf05756e7225f976daf2.1920x1080.jpg?t=1681730384", GameId = Guid.Parse("5bfbf07a-6e1b-42d7-aef0-07bf212fac0a") },
-                        new Image {ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/ss_49168eeefdfb6e6030a5aed3fd7c1a83da870a9f.1920x1080.jpg?t=1681730384", GameId = Guid.Parse("5bfbf07a-6e1b-42d7-aef0-07bf212fac0a") },
-                        new Image {ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/ss_ae44286e6679da863ac27a4b6f46e46a5f7718a4.1920x1080.jpg?t=1681730384", GameId = Guid.Parse("5bfbf07a-6e1b-42d7-aef0-07bf212fac0a") },
+                        new Image { ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/ss_387896248b42a15239a9256844b3e4bff72fbc2a.1920x1080.jpg?t=1681730384", GameId = Guid.Parse("5bfbf07a-6e1b-42d7-aef0-07bf212fac0a") },
+                        new Image { ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/ss_541756ab775d679957dca1e7d249c91a8f5d1ddd.1920x1080.jpg?t=1681730384", GameId = Guid.Parse("5bfbf07a-6e1b-42d7-aef0-07bf212fac0a") },
+                        new Image { ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/ss_85016b8787e589e9f01046d9f01b7de265c90212.1920x1080.jpg?t=1681730384", GameId = Guid.Parse("5bfbf07a-6e1b-42d7-aef0-07bf212fac0a") },
+                        new Image { ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/ss_82ef22724be56337ec220fcc287b93fa9bbb01fb.1920x1080.jpg?t=1681730384", GameId = Guid.Parse("5bfbf07a-6e1b-42d7-aef0-07bf212fac0a") },
+                        new Image { ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/ss_c81bd3bb9b2a3dd26b2dfd4ae3b8cd19331f4263.1920x1080.jpg?t=1681730384", GameId = Guid.Parse("5bfbf07a-6e1b-42d7-aef0-07bf212fac0a") },
+                        new Image { ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/ss_c3ff3176af9e155e1a240b0ff47d34d4d3a86644.1920x1080.jpg?t=1681730384", GameId = Guid.Parse("5bfbf07a-6e1b-42d7-aef0-07bf212fac0a") },
+                        new Image { ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/ss_fbc86702c8ea7ba4ac8bcf05756e7225f976daf2.1920x1080.jpg?t=1681730384", GameId = Guid.Parse("5bfbf07a-6e1b-42d7-aef0-07bf212fac0a") },
+                        new Image { ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/ss_49168eeefdfb6e6030a5aed3fd7c1a83da870a9f.1920x1080.jpg?t=1681730384", GameId = Guid.Parse("5bfbf07a-6e1b-42d7-aef0-07bf212fac0a") },
+                        new Image { ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/ss_ae44286e6679da863ac27a4b6f46e46a5f7718a4.1920x1080.jpg?t=1681730384", GameId = Guid.Parse("5bfbf07a-6e1b-42d7-aef0-07bf212fac0a") },
                         new Image { ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/ss_d0b50351676da10c5403ec904cf7582636e65346.1920x1080.jpg?t=1681730384", GameId = Guid.Parse("5bfbf07a-6e1b-42d7-aef0-07bf212fac0a") },
                         new Image { ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/ss_74d11c230ebb44ff9a69b4533a7333551d5bfc6c.1920x1080.jpg?t=1681730384", GameId = Guid.Parse("5bfbf07a-6e1b-42d7-aef0-07bf212fac0a") },
                         new Image { ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1086940/ss_731cf9144980dac28c6e0224d1533550a7f86681.1920x1080.jpg?t=1681730384", GameId = Guid.Parse("5bfbf07a-6e1b-42d7-aef0-07bf212fac0a") },
@@ -237,7 +304,55 @@ namespace SteamCloneApp.DataAccess.Repositories.EntityFramework.Seeding
                         new Image { ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/ss_0002f18563d313bdd1d82c725d411408ebf762b0.1920x1080.jpg?t=1680026109", GameId = Guid.Parse("91634d8b-dbce-4c88-8042-94258321c151") },
                         new Image { ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/ss_526123764d1c628caa1eb62c596f1b732f416c8c.1920x1080.jpg?t=1680026109", GameId = Guid.Parse("91634d8b-dbce-4c88-8042-94258321c151") },
                         new Image { ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/ss_284ba40590de8f604ae693631c751a0aefdc452e.1920x1080.jpg?t=1680026109", GameId = Guid.Parse("91634d8b-dbce-4c88-8042-94258321c151") },
-                        new Image { ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/ss_9beef14102f164fa1163536d0fb3a51d0a2e4a3f.1920x1080.jpg?t=1680026109", GameId = Guid.Parse("91634d8b-dbce-4c88-8042-94258321c151") }
+                        new Image { ImageUrl = "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/ss_9beef14102f164fa1163536d0fb3a51d0a2e4a3f.1920x1080.jpg?t=1680026109", GameId = Guid.Parse("91634d8b-dbce-4c88-8042-94258321c151") },
+
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1222140/ss_9c900def2b1d9a003b7d3e202ea2a7556a36e081.1920x1080.jpg?t=1667468479", GameId = Guid.Parse("d33df182-d821-473f-b20b-7f6b3cace514") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1222140/ss_3011c05e404043e3bfed1f6de7fe12ffd58ddc9b.1920x1080.jpg?t=1667468479", GameId = Guid.Parse("d33df182-d821-473f-b20b-7f6b3cace514") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1222140/ss_9e6c271b6d11b1d0f35da336fb57b35fed0079d1.1920x1080.jpg?t=1667468479", GameId = Guid.Parse("d33df182-d821-473f-b20b-7f6b3cace514") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1222140/ss_b1e2a185bea13cccfc662e1286912bcd6f4ee798.1920x1080.jpg?t=1667468479", GameId = Guid.Parse("d33df182-d821-473f-b20b-7f6b3cace514") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1222140/ss_fbc13a0d5b5b784c053042eb4ea09a30de069b3a.1920x1080.jpg?t=1667468479", GameId = Guid.Parse("d33df182-d821-473f-b20b-7f6b3cace514") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1222140/ss_b6dc18d77c4be0d851d1c26f1c352988ef5b07a2.1920x1080.jpg?t=1667468479", GameId = Guid.Parse("d33df182-d821-473f-b20b-7f6b3cace514") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1222140/ss_71d12349ce93190af99dbf48faeae50416d9cbc7.1920x1080.jpg?t=1667468479", GameId = Guid.Parse("d33df182-d821-473f-b20b-7f6b3cace514") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1222140/ss_4ba58d269bce7db923575cc033c888cb83cc1cba.1920x1080.jpg?t=1667468479", GameId = Guid.Parse("d33df182-d821-473f-b20b-7f6b3cace514") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1222140/ss_d843de340cec5939af9cff19c467371f26a9b4b1.1920x1080.jpg?t=1667468479", GameId = Guid.Parse("d33df182-d821-473f-b20b-7f6b3cace514") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1222140/ss_f5625ad291da001ad04f19b6ef0d6c0a404d0c91.1920x1080.jpg?t=1667468479", GameId = Guid.Parse("d33df182-d821-473f-b20b-7f6b3cace514") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1222140/ss_cca3d17b5479784379aaec006dcb36a5406aed34.1920x1080.jpg?t=1667468479", GameId = Guid.Parse("d33df182-d821-473f-b20b-7f6b3cace514") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1222140/ss_7b1c36dbc3deb1515a65aaaca42795813de08a83.1920x1080.jpg?t=1667468479", GameId = Guid.Parse("d33df182-d821-473f-b20b-7f6b3cace514") },
+
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/534380/ss_d7906b3946d4857d28c159e7a1555a003a4426f8.1920x1080.jpg?t=1685707337", GameId = Guid.Parse("e07c0e1c-7ea0-4cbf-87c1-6def3629fd04") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/534380/ss_6b8d4cc1f7d657745cfd7aab941d3be0067dec00.1920x1080.jpg?t=1685707337", GameId = Guid.Parse("e07c0e1c-7ea0-4cbf-87c1-6def3629fd04") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/534380/ss_fe9a52a60f4739a44cbd8b0c0856033ea6996624.1920x1080.jpg?t=1685707337", GameId = Guid.Parse("e07c0e1c-7ea0-4cbf-87c1-6def3629fd04") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/534380/ss_84ca00f3d3b48e0a1fa6b96b17f02a65f1447950.1920x1080.jpg?t=1685707337", GameId = Guid.Parse("e07c0e1c-7ea0-4cbf-87c1-6def3629fd04") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/534380/ss_28860dda506d28aea744a08744bad8afb1b506c5.1920x1080.jpg?t=1685707337", GameId = Guid.Parse("e07c0e1c-7ea0-4cbf-87c1-6def3629fd04") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/534380/ss_64ba1a8bd42d3d0a34bc894d6faa0e57a1328aef.1920x1080.jpg?t=1685707337", GameId = Guid.Parse("e07c0e1c-7ea0-4cbf-87c1-6def3629fd04") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/534380/ss_38ca559ee79b64ef65f6d5c5c722778f6447425e.1920x1080.jpg?t=1685707337", GameId = Guid.Parse("e07c0e1c-7ea0-4cbf-87c1-6def3629fd04") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/534380/ss_1c3c5764cc6d6a9a86122a0de643973c0c8dca1b.1920x1080.jpg?t=1685707337", GameId = Guid.Parse("e07c0e1c-7ea0-4cbf-87c1-6def3629fd04") },
+
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/239140/ss_a3771358b8eb4ea4c8f99c5850711f55b87804de.1920x1080.jpg?t=1674129492", GameId = Guid.Parse("908df1f1-b615-4e5e-8beb-6264b7fd6e49") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/239140/ss_1f0dc94f46fa1a953827188188887f6a12911ec2.1920x1080.jpg?t=1674129492", GameId = Guid.Parse("908df1f1-b615-4e5e-8beb-6264b7fd6e49") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/239140/ss_488226f013287012e0feaed2fb7799dbe038fd00.1920x1080.jpg?t=1674129492", GameId = Guid.Parse("908df1f1-b615-4e5e-8beb-6264b7fd6e49") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/239140/ss_37f8192f3bf85359ddee0b5c2e9a58eaaf6c4026.1920x1080.jpg?t=1674129492", GameId = Guid.Parse("908df1f1-b615-4e5e-8beb-6264b7fd6e49") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/239140/ss_ac414827362042b5f4a95ab90df508adc822ddc1.1920x1080.jpg?t=1674129492", GameId = Guid.Parse("908df1f1-b615-4e5e-8beb-6264b7fd6e49") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/239140/ss_3b41c96ae1a6f31c597187672221b8db9b78419b.1920x1080.jpg?t=1674129492", GameId = Guid.Parse("908df1f1-b615-4e5e-8beb-6264b7fd6e49") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/239140/ss_8bf1e0e5333f5899b413f90d67a3cfe8b8b8f8e1.1920x1080.jpg?t=1674129492", GameId = Guid.Parse("908df1f1-b615-4e5e-8beb-6264b7fd6e49") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/239140/ss_e31d8536ca5c947c8cbf6486473f50c3c27ee255.1920x1080.jpg?t=1674129492", GameId = Guid.Parse("908df1f1-b615-4e5e-8beb-6264b7fd6e49") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/239140/ss_d7e781ddd8ea78d5c8fedd27e0c1d02425cd91eb.1920x1080.jpg?t=1674129492", GameId = Guid.Parse("908df1f1-b615-4e5e-8beb-6264b7fd6e49") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/239140/ss_2c18c2b5a03a736453d1222e05019e89f80ed8dc.1920x1080.jpg?t=1674129492", GameId = Guid.Parse("908df1f1-b615-4e5e-8beb-6264b7fd6e49") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/239140/ss_e3d9596c0ee06b6e4f9b09e5320d70fbf59cc78e.1920x1080.jpg?t=1674129492", GameId = Guid.Parse("908df1f1-b615-4e5e-8beb-6264b7fd6e49") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/239140/ss_fd1b12177c50cb45ab5fd6105ba2c68d39f8c012.1920x1080.jpg?t=1674129492", GameId = Guid.Parse("908df1f1-b615-4e5e-8beb-6264b7fd6e49") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/239140/ss_7ed04fc8acf05d721f5d17ee71b2f51080dd8463.1920x1080.jpg?t=1674129492", GameId = Guid.Parse("908df1f1-b615-4e5e-8beb-6264b7fd6e49") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/239140/ss_0f20a60df3fec00deb16c12428cdb35fcce5bf0d.1920x1080.jpg?t=1674129492", GameId = Guid.Parse("908df1f1-b615-4e5e-8beb-6264b7fd6e49") },
+
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1593500/ss_6eccc970b5de2943546d93d319be1b5c0618f21b.1920x1080.jpg?t=1650554420", GameId = Guid.Parse("c1c4daa3-1cc7-4f1a-8cd8-41de0726c8ad") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1593500/ss_f1bff24d3967a21d303d95e11ed892e3d9113057.1920x1080.jpg?t=1650554420", GameId = Guid.Parse("c1c4daa3-1cc7-4f1a-8cd8-41de0726c8ad") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1593500/ss_3670ba72c7e3e9c3c3225547ef2c1053504e62b8.1920x1080.jpg?t=1650554420", GameId = Guid.Parse("c1c4daa3-1cc7-4f1a-8cd8-41de0726c8ad") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1593500/ss_93a3ca63aa2cd8c675bbb6430324ee3f2d44b845.1920x1080.jpg?t=1650554420", GameId = Guid.Parse("c1c4daa3-1cc7-4f1a-8cd8-41de0726c8ad") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1593500/ss_1bd99270dcbd4ff9fe9c94b0d9c8ffc50ebb42c7.1920x1080.jpg?t=1650554420", GameId = Guid.Parse("c1c4daa3-1cc7-4f1a-8cd8-41de0726c8ad") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1593500/ss_0858b868ea51d53f73bd805ba7382f027dd33dca.1920x1080.jpg?t=1650554420", GameId = Guid.Parse("c1c4daa3-1cc7-4f1a-8cd8-41de0726c8ad") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1593500/ss_1351cb512d008f7e47fc50b74197f4f8eb6f3419.1920x1080.jpg?t=1650554420", GameId = Guid.Parse("c1c4daa3-1cc7-4f1a-8cd8-41de0726c8ad") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1593500/ss_8db3de5b5d611e50945268848de2889e1ed4ba84.1920x1080.jpg?t=1650554420", GameId = Guid.Parse("c1c4daa3-1cc7-4f1a-8cd8-41de0726c8ad") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1593500/ss_190a972a5bd3144d8944dcdfd7759bb1149017c0.1920x1080.jpg?t=1650554420", GameId = Guid.Parse("c1c4daa3-1cc7-4f1a-8cd8-41de0726c8ad") },
+                        new Image {ImageUrl = "https://cdn.akamai.steamstatic.com/steam/apps/1593500/ss_e0edce62c590bc063a90a1296184392d0a9521da.1920x1080.jpg?t=1650554420", GameId = Guid.Parse("c1c4daa3-1cc7-4f1a-8cd8-41de0726c8ad") },                
             };
                 context.Images.AddRange(images);
                 context.SaveChanges();

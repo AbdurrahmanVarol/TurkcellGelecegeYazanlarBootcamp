@@ -19,4 +19,8 @@
     <ProjectReference Include="..\SteamCloneApp.DataAccess\SteamCloneApp.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\İmages\" />
+  </ItemGroup>
+
 </Project>

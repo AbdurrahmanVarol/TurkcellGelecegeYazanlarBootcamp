@@ -70,6 +70,7 @@ namespace SteamCloneApp.MVC.Controllers
         {
             purchaseGameRequest.UserId = UserId;
             await _userService.AddGameToUser(purchaseGameRequest);
+            HttpContext.Session.SetString("Cart", "");
             return Json(true);
         }
          
