@@ -103,8 +103,7 @@
             event.cancelBubble = true
             let li = event.target.parentNode
             let ul = event.target.parentNode.parentNode
-            ul.removeChild(li);
-            changeItemCounter()
+            ul.removeChild(li)
         }
 
         const getDataFromInputs = () => {
@@ -140,7 +139,9 @@
                     type: "POST",
                     url: "/game/creategame",
                     data: getDataFromInputs(),
-                    success: function () { }
+                    success: function () {
+                        alertify.success('Oyun Eklendi')
+                    }
                 })
             })
         })

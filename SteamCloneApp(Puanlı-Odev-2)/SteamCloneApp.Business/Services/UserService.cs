@@ -26,14 +26,14 @@ namespace SteamCloneApp.Business.Services
 
         public async Task AddGameToUser(PurchaseGameRequest purchaseGameRequest)
         {
-            var user = await _userRepository.GetAsync(p=>p.Id == purchaseGameRequest.UserId);
-            if(user is null)
+            var user = await _userRepository.GetAsync(p => p.Id == purchaseGameRequest.UserId);
+            if (user is null)
             {
                 throw new Exception("asaaaa");
             }
             foreach (var gameId in purchaseGameRequest.GameIds)
             {
-                var game = await _gameRepository.GetAsync(p=>p.Id ==  gameId);
+                var game = await _gameRepository.GetAsync(p => p.Id == gameId);
                 user.Games.Add(game);
             }
             await _userRepository.UpdateAsync(user);

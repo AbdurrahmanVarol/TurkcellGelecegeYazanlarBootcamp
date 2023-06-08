@@ -1,4 +1,5 @@
-﻿using SteamCloneApp.Business.Dtos.Requests;
+﻿using AutoMapper;
+using SteamCloneApp.Business.Dtos.Requests;
 using SteamCloneApp.Business.Dtos.Responses;
 using SteamCloneApp.Entities.Entities;
 using System;
@@ -12,10 +13,14 @@ namespace SteamCloneApp.Business.Services
     public class AuthService : IAuthService
     {      
         private readonly IUserService _userService;
+        private readonly IRoleService _roleService;
+        private readonly IMapper _mapper;
 
-        public AuthService(IUserService userService)
+        public AuthService(IUserService userService, IMapper mapper, IRoleService roleService)
         {
             _userService = userService;
+            _mapper = mapper;
+            _roleService = roleService;
         }
 
         public void CreatePasswordHash(string password, out string passwordHash, out string passwordSalt)
@@ -37,16 +42,7 @@ namespace SteamCloneApp.Business.Services
             {
                 throw new ArgumentException(errorMessage);
             }
-            return new UserResponse
-            {
-                Id = user.Id,
-                Email = user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                NickName = user.NickName,
-                Roles = user.Roles.Select(p => p.Name).ToList()
-            };
-            //return _mapper.Map<UserResponse>(user);
+            return _mapper.Map<UserResponse>(user);
         }
 
         public bool VerifyPasswordHash(string password, string passwordHash, string passwordSalt)
@@ -63,6 +59,9 @@ namespace SteamCloneApp.Business.Services
             //TODO: Validasyon eklenecek
 
             CreatePasswordHash(registerRequest.Password, out string passwordHash, out string passwordSalt);
+
+            var role = await _roleService.GetRoleById(2);
+
             var user = new User
             {
                 FirstName = registerRequest.FirstName,
@@ -71,6 +70,7 @@ namespace SteamCloneApp.Business.Services
                 NickName = registerRequest.NickName,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
+                Roles = new List<Role>() { role }
             };
             await _userService.AddAsync(user);
         }

@@ -42,7 +42,9 @@
         "icons/github.svg",
         "icons/microsoft.svg",
         "icons/steam.svg",
-        "icons/apple.svg"
+        "icons/apple.svg",
+        "icons/download.svg"
+
       ]
     }
   ]

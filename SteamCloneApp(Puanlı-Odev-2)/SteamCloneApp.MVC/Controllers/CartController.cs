@@ -77,8 +77,13 @@ namespace SteamCloneApp.MVC.Controllers
         public IActionResult CartDetail()
         {
             var gamesInCart = GetGamesFromSession();
-            var result = gamesInCart.Select(p => _gameService.GetGameByIdForCartAsync(p.GameId).GetAwaiter().GetResult());
-            return View(result);            
+            var games = gamesInCart.Select(p => _gameService.GetGameByIdForCartAsync(p.GameId).GetAwaiter().GetResult());
+            var viewModel = new CartDetailViewModel
+            {
+                Games = games,
+                IsAuthenticated = HttpContext.User.Identity.IsAuthenticated
+            };
+            return View(viewModel);            
         }
     }
 }

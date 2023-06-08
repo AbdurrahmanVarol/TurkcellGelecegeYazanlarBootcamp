@@ -77,10 +77,14 @@ namespace SteamCloneApp.MVC.Controllers
         public async Task<IActionResult> Register(RegisterRequest registerRequest)
         {
             await _authService.RegisterAsync(registerRequest);
-            return Json(new
-            {
-                isSuccess = true,
-            });
+            TempData["RegisterMessage"] = "Kullanıcı eklendi.";
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }

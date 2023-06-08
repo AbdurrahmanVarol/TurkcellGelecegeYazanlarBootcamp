@@ -1,0 +1,33 @@
+﻿@model IEnumerable<GameDisplayResponse>
+@{
+    ViewData["Title"] = "GameSettings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>GameSettings</h1>
+@if (TempData["GameSettingInfo"] != null)
+{
+    <div class="alert alert-danger text-center" role="alert">
+        @TempData["GameSettingInfo"]
+    </div>
+}
+<table class="table table-striped-columns">
+    <thead>
+        <tr>
+            <th>Oyun Adı</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var game in Model)
+        {
+            <tr>
+                <td>@game.Title</td>
+                <td><a class="btn btn-outline-warning" asp-action="updategame" asp-route-id="@game.Id">Düzenle</a></td>
+                <td><a class="btn btn-outline-danger" asp-action="deletegame" asp-route-id="@game.Id">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+

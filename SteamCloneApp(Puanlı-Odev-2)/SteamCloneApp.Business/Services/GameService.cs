@@ -1,4 +1,6 @@
-﻿using SteamCloneApp.Business.Dtos.Requests;
+﻿using AutoMapper;
+using Azure.Core;
+using SteamCloneApp.Business.Dtos.Requests;
 using SteamCloneApp.Business.Dtos.Responses;
 using SteamCloneApp.DataAccess.Repositories;
 using SteamCloneApp.Entities.Entities;
@@ -15,17 +17,20 @@ namespace SteamCloneApp.Business.Services
     {
         private readonly IGameRepository _gameRepository;
         private readonly IGenreRepository _genreRepository;
-        private readonly IImageRepository _imageRepository;
-        public GameService(IGameRepository gameRepository, IGenreRepository genreRepository, IImageRepository imageRepository)
+        private readonly IImageService _imageService;
+        private readonly IMapper _mapper;
+        public GameService(IGameRepository gameRepository, IGenreRepository genreRepository, IMapper mapper, IImageService imageService)
         {
             _gameRepository = gameRepository;
             _genreRepository = genreRepository;
-            _imageRepository = imageRepository;
+            _mapper = mapper;
+            _imageService = imageService;
         }
 
         public async Task AddAsync(CreateGameRequest request)
         {
             var genres = await _genreRepository.GetAllAsync(x => request.Genres.Contains(x.Id));
+
             var game = new Game
             {
                 Description = request.Description,
@@ -39,54 +44,66 @@ namespace SteamCloneApp.Business.Services
                 Genres = genres
             };
             await _gameRepository.AddAsync(game);
-            foreach (var imageUrl in request.ImageUrls)
-            {
-                await _imageRepository.AddAsync(new Image
-                {
-                    GameId = game.Id,
-                    ImageUrl = imageUrl,
-                });
-            }
+
+            await _imageService.AddRange(request.ImageUrls, game.Id);
         }
 
-        public async Task<List<GameDisplayResponse>> GetAllAsync()
+        public async Task DeleteAsync(Guid id)
+        {
+            var game = await _gameRepository.GetAsync(p => p.Id == id);
+
+            if (game is null)
+            {
+                throw new ArgumentNullException(nameof(game));
+            }
+            await _gameRepository.DeleteAsync(game);
+        }
+
+        public async Task UpdateAsync(UpdateGameRequest updateGameRequest)
+        {
+            var game = await _gameRepository.GetAsync(p => p.Id == updateGameRequest.Id);
+
+            if (game is null)
+            {
+                throw new ArgumentNullException(nameof(game));
+            }
+
+            var genres = await _genreRepository.GetAllAsync(x => updateGameRequest.Genres.Contains(x.Id));
+            var addedImages = updateGameRequest.ImageUrls.Where(p => !game.Images.Any(i => i.ImageUrl.Equals(p)));
+            var removedImages = game.Images.Where(p => !updateGameRequest.ImageUrls.Any(i => i.Equals(p.ImageUrl)));
+
+            game.Title = updateGameRequest.Title;
+            game.Description = updateGameRequest.Description;
+            game.Price = updateGameRequest.Price;
+            game.CoverUrl = updateGameRequest.CoverUrl;
+            game.DevelopedById = updateGameRequest.DevelopedById;
+            game.PublishedById = updateGameRequest.PublishedById;
+            game.Genres = genres;
+
+            var images = addedImages.Select(p => new Image
+            {
+                GameId = game.Id,
+                ImageUrl = p,
+            }).ToList();
+            await _gameRepository.UpdateAsync(game);
+
+            await _imageService.AddRange(updateGameRequest.ImageUrls, game.Id);
+            await _imageService.RemoveRange(removedImages);
+
+        }
+
+        public async Task<IEnumerable<GameDisplayResponse>> GetAllAsync()
         {
             var games = await _gameRepository.GetAllAsync();
 
-            return games.Select(p => new GameDisplayResponse
-            {
-                Id = p.Id,
-                Description = p.Description,
-                Title = p.Title,
-                Price = p.Price,
-                ReleaseAt = p.ReleaseAt,
-                DeveloperName = p.DevelopedBy.Name,
-                PublisherName = p.PublishedBy.Name,
-                CoverUrl = p.CoverUrl,
-                IconUrl = p.IconUrl,
-                Genres = p.Genres.Select(p => p.Name).ToList(),
-                Images = p.Images.Select(p => p.ImageUrl).ToList()
-            }).OrderByDescending(p => p.ReleaseAt).ToList();
+            return _mapper.Map<IEnumerable<GameDisplayResponse>>(games).OrderByDescending(p => p.ReleaseAt);
         }
-        public async Task<List<GameDisplayResponse>> GetGamesByUserIdAsync(Guid userId)
+        public async Task<IEnumerable<GameDisplayResponse>> GetGamesByUserIdAsync(Guid userId)
         {
 
             var games = await _gameRepository.GetAllAsync(g => g.Users.Any(u => u.Id == userId));
 
-            return games.Select(p => new GameDisplayResponse
-            {
-                Id = p.Id,
-                Description = p.Description,
-                Title = p.Title,
-                Price = p.Price,
-                ReleaseAt = p.ReleaseAt,
-                DeveloperName = p.DevelopedBy.Name,
-                PublisherName = p.PublishedBy.Name,
-                CoverUrl = p.CoverUrl,
-                IconUrl = p.IconUrl,
-                Genres = p.Genres.Select(p => p.Name).ToList(),
-                Images = p.Images.Select(p => p.ImageUrl).ToList()
-            }).ToList();
+            return _mapper.Map<IEnumerable<GameDisplayResponse>>(games);
         }
         public async Task<GameDisplayResponse> GetGameByIdAsync(Guid id)
         {
@@ -95,30 +112,7 @@ namespace SteamCloneApp.Business.Services
             {
                 throw new ArgumentNullException("---------");
             }
-            var response = new GameDisplayResponse
-            {
-                Id = game.Id,
-                Description = game.Description,
-                Title = game.Title,
-                Price = game.Price,
-                IconUrl = game.IconUrl,
-                CoverUrl = game.CoverUrl,
-                ReleaseAt = game.ReleaseAt,
-                DeveloperName = game.DevelopedBy.Name,
-                PublisherName = game.PublishedBy.Name,
-                Genres = game.Genres.Select(p => p.Name).ToList(),
-                Images = game.Images.Select(p => p.ImageUrl).ToList(),
-                Reviews = game.Reviews.Select(p => new ReviewResponse
-                {
-                    Id = p.Id,
-                    GameId = p.GameId,
-                    IsRecommend = p.IsRecommend,
-                    Post = p.Post,
-                    PostedAt = p.PostedAt,
-                    UserId = p.UserId
-                }).ToList()
-            };
-            return response;
+            return _mapper.Map<GameDisplayResponse>(game);
         }
 
         public async Task<GameCartResponse> GetGameByIdForCartAsync(Guid id)
@@ -128,14 +122,7 @@ namespace SteamCloneApp.Business.Services
             {
                 throw new ArgumentNullException("---------");
             }
-            var response = new GameCartResponse
-            {
-                Id = game.Id,
-                Title = game.Title,
-                Price = game.Price,
-                CoverUrl = game.CoverUrl
-            };
-            return response;
+            return _mapper.Map<GameCartResponse>(game);
         }
     }
 }

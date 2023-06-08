@@ -20,7 +20,7 @@ namespace SteamCloneApp.MVC.Middlewares
 
             if (statusCode == 404)
             {
-                context.Response.Redirect("/home/notfound");
+                context.Response.Redirect("/home/notfoundpage");
             }
         }
     }

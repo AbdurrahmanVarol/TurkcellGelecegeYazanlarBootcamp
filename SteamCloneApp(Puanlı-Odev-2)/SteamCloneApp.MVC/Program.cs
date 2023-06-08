@@ -41,11 +41,12 @@ if (!app.Environment.IsDevelopment())
 }
 
 
-app.UseMiddleware<NotFoundMiddleware>();
 
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+
+app.UseMiddleware<NotFoundMiddleware>();
 
 app.UseRouting();
 

@@ -232,6 +232,16 @@ namespace SteamCloneApp.DataAccess.Repositories.EntityFramework.Seeding
                             Roles = roles.Where(p=>p.
                             Name.Equals("Admin")|| p.
                             Name.Equals("Customer")).ToList() 
+                        },
+                        new User 
+                        { 
+                            FirstName = "Customer", 
+                            LastName = "Customer", 
+                            Email = "Customer@gmail.com",
+                            NickName = "Customer", 
+                            PasswordSalt = passwordSalt,
+                            PasswordHash = passwordHash,
+                            Roles = roles.Where(p=>p.Name.Equals("Customer")).ToList() 
                         }
                         };
                 context.Users.AddRange(users);

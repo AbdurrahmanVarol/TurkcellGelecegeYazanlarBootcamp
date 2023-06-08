@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteamCloneApp.DataAccess.Repositories
+namespace SteamCloneApp.Business.Services
 {
-    public interface IImageRepository : IEntityRepository<Image>
+    public interface IImageService
     {
-        Task AddRange(IEnumerable<Image> images);
+        Task<IEnumerable<string>> GetImageUrlsBtGameIdAsync(Guid gameId);
+        Task AddRange(IEnumerable<string> images,Guid gameId);
         Task RemoveRange(IEnumerable<Image> images);
     }
 }

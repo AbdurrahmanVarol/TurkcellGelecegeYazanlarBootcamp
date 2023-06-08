@@ -4,8 +4,14 @@
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }
 <h1 class="text-center text-light mb-4">Kayıt Ol</h1>
+@if (TempData["RegisterMessage"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        @TempData["RegisterMessage"]
+    </div>
+}
 <div class="p-2 alert-danger" asp-validation-summary="ModelOnly"></div>
-<form asp-action="register" asp-controller="">
+<form asp-action="register" asp-controller="auth">
     <div class="form-group">
         <label class="text-light" asp-for="FirstName">Ad:</label>
         <input class="form-control" asp-for="FirstName" placeholder="Adınızı girin" />

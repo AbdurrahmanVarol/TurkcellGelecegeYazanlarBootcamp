@@ -26,7 +26,7 @@ namespace SteamCloneApp.MVC.Controllers
         {
             return View();
         }
-        public IActionResult NotFound()
+        public IActionResult NotFoundPage()
         {
             return View();
         }

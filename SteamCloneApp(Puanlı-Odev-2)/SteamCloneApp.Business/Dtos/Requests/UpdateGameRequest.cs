@@ -1,13 +1,12 @@
-﻿using SteamCloneApp.Entities.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteamCloneApp.Business.Dtos.Responses
+namespace SteamCloneApp.Business.Dtos.Requests
 {
-    public class GameDisplayResponse
+    public class UpdateGameRequest
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
@@ -17,11 +16,8 @@ namespace SteamCloneApp.Business.Dtos.Responses
         public string IconUrl { get; set; }
         public string CoverUrl { get; set; }
         public int PublishedById { get; set; }
-        public string PublisherName { get; set; }
         public int DevelopedById { get; set; }
-        public string DeveloperName { get; set; }
-        public List<string> Genres { get; set; }
-        public List<string> Images { get; set; }
-        public List<ReviewResponse> Reviews { get; set; }
+        public List<int> Genres { get; set; } = new();
+        public List<string> ImageUrls { get; set; } = new();
     }
 }

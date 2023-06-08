@@ -1,4 +1,4 @@
-﻿@model List<GameDisplayResponse>
+﻿@model IEnumerable<GameDisplayResponse>
 @{
     ViewData["Title"] = "Library";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,10 +7,10 @@
 <h1>Library</h1>
 
 <div class="row" style="height:900px;">
-    <div class="col-4 p-3" style="background-color:rgb(36, 40, 47);">
+    <div id="gameList" class="col-4 p-3" style="background-color:rgb(36, 40, 47);">
         @foreach (var game in Model)
         {
-            <div class="row mb-3" style="height: fit-content;" onclick="redirectToDetails('@game.Id')">
+            <div class="row game-row mb-3" style="height: fit-content;">
                 <div class="row">
                     <div class="col-md-2 p-0 m-0">
                         <img src=@game.CoverUrl class="img-fluid rounded-start" alt="resim" style="max-height:100%;max-width:100%;">
@@ -18,11 +18,31 @@
                     <div class="col-md-9">
                         <h6 class="card-title">@game.Title</h6>
                     </div>
-                </div>             
+                </div>
             </div>
         }
     </div>
-    <div class="col-7 bg-secondary">
+    <div id="gameDetail" class="col-7 bg-secondary p-0 m-0">
+        
     </div>
 </div>
+
+@section Scripts{
+    <script>
+        const loadDetail= (imgUrl) =>{
+            let detail = document.getElementById('gameDetail')
+            detail.innerHTML = ""
+            let html = ``
+            html += `<div class="w-100 h-100">
+                    <img src='${imgUrl}' class="img-fluid " alt="resim" style="max-height:100%;min-width:100%;" />
+                    <div class="p-2">
+                        <button class="btn btn-primary">
+                            <i class="bi bi-download"></i> Yükle
+                        </button>
+                    </div>
+                </div>`
+                detail.innerHTML = html
+        }
+    </script>
+}
 

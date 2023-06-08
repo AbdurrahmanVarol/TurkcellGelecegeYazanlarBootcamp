@@ -22,6 +22,8 @@ namespace SteamCloneApp.Business
             services.AddScoped<IPublisherService, PublisherService>();
             services.AddScoped<IDeveloperService, DeveloperService>();
             services.AddScoped<IReviewService,ReviewService>();
+            services.AddScoped<IImageService,ImageService>();
+            services.AddScoped<IRoleService,RoleService>();
 
             //services.addhttpcontextaccessor
         }

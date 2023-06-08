@@ -1,4 +1,4 @@
-﻿@model List<GameDisplayResponse>
+﻿@model IEnumerable<GameDisplayResponse>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -86,6 +86,7 @@
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('cartButton').innerText = `Sepetim(${data.count})`
+                    alertify.success('Sepete eklendi')
                 })
         }
     </script>

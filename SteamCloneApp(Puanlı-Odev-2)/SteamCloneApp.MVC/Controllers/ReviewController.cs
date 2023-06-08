@@ -17,6 +17,12 @@ namespace SteamCloneApp.MVC.Controllers
             _reviewService = reviewService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetReviewsByGameId(Guid id)
+        {
+            var reviews = await _reviewService.GetReviewsByGameId(id);
+            return Ok(reviews);
+        }
         [HttpPost]
         public async Task<IActionResult> CreateReview(CreateReviewRequest createReviewRequest)
         {

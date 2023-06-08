@@ -1,4 +1,5 @@
-﻿using SteamCloneApp.Business.Dtos.Responses;
+﻿using AutoMapper;
+using SteamCloneApp.Business.Dtos.Responses;
 using SteamCloneApp.DataAccess.Repositories;
 using SteamCloneApp.Entities.Entities;
 using System;
@@ -13,18 +14,19 @@ namespace SteamCloneApp.Business.Services
     public class PublisherService : IPublisherService
     {
         private readonly IPublisherRepository _publisherRepository;
+        private readonly IMapper _mapper;
 
-        public PublisherService(IPublisherRepository publisherRepository)
+        public PublisherService(IPublisherRepository publisherRepository, IMapper mapper)
         {
             _publisherRepository = publisherRepository;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<PublisherResponse>> GetAllAsync()
         {
             var publishers = await _publisherRepository.GetAllAsync();
 
-            var serialized = JsonSerializer.Serialize(publishers);
-            return JsonSerializer.Deserialize<IEnumerable<PublisherResponse>>(serialized);
+            return _mapper.Map<IEnumerable<PublisherResponse>>(publishers);
         }
     }
 }

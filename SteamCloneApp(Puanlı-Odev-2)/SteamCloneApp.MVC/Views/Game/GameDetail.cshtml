@@ -8,9 +8,12 @@
     <div class="col-7">
         <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="true">
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src=@Model.Images.Last() class="d-block w-100" alt=@Model.Title>
-                </div>
+                @if (Model.Images.Any())
+                {
+                    <div class="carousel-item active">
+                        <img src=@Model.Images.Last() class="d-block w-100" alt=@Model.Title>
+                    </div>
+                }
                 @foreach (var imageUrl in Model.Images)
                 {
                     <div class="carousel-item">
@@ -74,8 +77,8 @@
     </div>
 }
 
-<div class="reviews">
-    <h4>İncelemeler</h4>
+<h4>İncelemeler</h4>
+<div id="reviews">
     @if (!Model.Reviews.Any())
     {
         <h4 class="text-light">
@@ -91,7 +94,7 @@
         @foreach (var review in Model.Reviews)
         {
             <div class="row mb-3 review">
-                <div class="col-2 bg-dark">aa</div>
+                <div class="col-2 bg-dark">@review.UserName</div>
                 <div class="col-9 ms-2">
                     <div class="p-2">
                         @if (review.IsRecommend)
@@ -125,6 +128,56 @@
                 touch: false
             })
 
+            const getReviews = (gameId) => {
+                let result = []
+                $.ajax({
+                    type: "GET",
+                    url: `/Review/GetReviewsByGameId/${gameId}`,
+                    success: function (data) {
+                        reloadReviews(data)
+                    }
+                })
+            }
+            const reloadReviews = (reviews) => {
+                let a = [...reviews]
+                console.log("a")
+                console.log(reviews)
+                console.log(a)
+                console.log(a.length == 0)
+                console.log(!reviews)
+                let reviewsElement = document.getElementById('reviews')
+                reviewsElement.innerHTML = ""
+                let html = ``
+                let isAuthenticated = "@ViewBag.IsAuthenticated"
+
+                if (!reviews || reviews.length == 0) {
+                    html += `<h4 class="text-light">
+                                    Bu oyuna henüz bir inceleme girilmemiş.
+                       ${!isAuthenticated ? '<span><strong><a asp-action="login" asp-controller="auth">Giriş Yaparak</a></strong> bu oyuna bir inceleme yazabilirsiniz.</span>' : ''}
+                                </h4>`
+                }
+                else {
+                    for (let review of reviews) {
+                        html += getReviewAsString(review)
+                    }
+                }
+                reviewsElement.innerHTML = html
+            }
+            const getReviewAsString = (review) => {
+                return `
+
+                               <div class="row mb-3 review">
+                                <div class="col-2 bg-dark">${review.userName}</div>
+                                <div class="col-9 ms-2">
+                                    <div class="p-2">
+                                        <span><span class="text-info"> ${review.isRecommend ? '<img src="https://store.akamai.steamstatic.com/public/shared/images/userreviews/icon_thumbsUp_v6.png" /></span> TAVSİYE EDİLİYOR ' : '<img src=" https://store.akamai.steamstatic.com/public/shared/images/userreviews/icon_thumbsDown_v6.png" /></span> TAVSİYE EDİLMİYOR'}</span>
+                                    </div>
+                                        <p>Tarih: ${review.postedAt}PostedAt</p>
+                                        <p>${review.post}</p>
+                                    </div>
+                            </div>`
+            }
+
 
             $('#addReview').on('click', function () {
                 let post = document.getElementById('post')
@@ -140,7 +193,11 @@
                     type: "POST",
                     url: "/Review/CreateReview",
                     data: dataa,
-                    success: function () { }
+                    success: function () {
+                        let reviews = getReviews(gameId)
+                        alertify.success('İnceleme Eklendi')
+
+                    }
                 })
             })
 

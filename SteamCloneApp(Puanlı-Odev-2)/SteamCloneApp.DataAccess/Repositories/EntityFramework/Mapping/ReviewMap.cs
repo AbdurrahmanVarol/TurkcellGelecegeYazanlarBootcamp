@@ -16,6 +16,8 @@ namespace SteamCloneApp.DataAccess.Repositories.EntityFramework.Mapping
             builder.HasKey(p => p.Id);
 
             builder.Property(p => p.Id).HasDefaultValueSql("NEWID()");
+
+            builder.Navigation(p => p.User).AutoInclude();
         }
     }
 }
