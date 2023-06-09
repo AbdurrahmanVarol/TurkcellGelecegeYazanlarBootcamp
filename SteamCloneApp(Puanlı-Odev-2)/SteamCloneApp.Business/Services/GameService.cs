@@ -1,35 +1,28 @@
 ﻿using AutoMapper;
-using Azure.Core;
 using SteamCloneApp.Business.Dtos.Requests;
 using SteamCloneApp.Business.Dtos.Responses;
 using SteamCloneApp.DataAccess.Repositories;
 using SteamCloneApp.Entities.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace SteamCloneApp.Business.Services
 {
     public class GameService : IGameService
     {
         private readonly IGameRepository _gameRepository;
-        private readonly IGenreRepository _genreRepository;
+        private readonly IGenreService _genreService;
         private readonly IImageService _imageService;
         private readonly IMapper _mapper;
-        public GameService(IGameRepository gameRepository, IGenreRepository genreRepository, IMapper mapper, IImageService imageService)
+        public GameService(IGameRepository gameRepository, IMapper mapper, IImageService imageService, IGenreService genreService)
         {
             _gameRepository = gameRepository;
-            _genreRepository = genreRepository;
             _mapper = mapper;
             _imageService = imageService;
+            _genreService = genreService;
         }
 
         public async Task AddAsync(CreateGameRequest request)
         {
-            var genres = await _genreRepository.GetAllAsync(x => request.Genres.Contains(x.Id));
+            var genres = (await _genreService.GetGenresByIdAsync(request.Genres)).ToList();
 
             var game = new Game
             {
@@ -68,7 +61,8 @@ namespace SteamCloneApp.Business.Services
                 throw new ArgumentNullException(nameof(game));
             }
 
-            var genres = await _genreRepository.GetAllAsync(x => updateGameRequest.Genres.Contains(x.Id));
+            var genres = (await _genreService.GetGenresByIdAsync(updateGameRequest.Genres)).ToList();
+
             var addedImages = updateGameRequest.ImageUrls.Where(p => !game.Images.Any(i => i.ImageUrl.Equals(p)));
             var removedImages = game.Images.Where(p => !updateGameRequest.ImageUrls.Any(i => i.Equals(p.ImageUrl)));
 
@@ -80,11 +74,6 @@ namespace SteamCloneApp.Business.Services
             game.PublishedById = updateGameRequest.PublishedById;
             game.Genres = genres;
 
-            var images = addedImages.Select(p => new Image
-            {
-                GameId = game.Id,
-                ImageUrl = p,
-            }).ToList();
             await _gameRepository.UpdateAsync(game);
 
             await _imageService.AddRange(updateGameRequest.ImageUrls, game.Id);

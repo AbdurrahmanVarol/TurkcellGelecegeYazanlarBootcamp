@@ -60,7 +60,7 @@ namespace SteamCloneApp.MVC.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin,Customer")]
+        [Authorize]
         public async Task<IActionResult> Library()
         {
             var games = await _gameService.GetGamesByUserIdAsync(UserId);
@@ -68,7 +68,7 @@ namespace SteamCloneApp.MVC.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin,Customer")]
+        [Authorize]
         public async Task<IActionResult> PurchaseGame([FromBody] PurchaseGameRequest purchaseGameRequest)
         {
             purchaseGameRequest.UserId = UserId;

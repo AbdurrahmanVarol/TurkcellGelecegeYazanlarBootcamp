@@ -83,7 +83,7 @@
     {
         <h4 class="text-light">
             Bu oyuna henüz bir inceleme girilmemiş.
-            @if (ViewBag.IsAuthenticated == null && !ViewBag.IsAuthenticated)
+            @if (ViewBag.IsAuthenticated == null || !ViewBag.IsAuthenticated)
             {
                 <span><strong><a asp-action="login" asp-controller="auth">Giriş Yaparak</a></strong> bu oyuna bir inceleme yazabilirsiniz.</span>
             }

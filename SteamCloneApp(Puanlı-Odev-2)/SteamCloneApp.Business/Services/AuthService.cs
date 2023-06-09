@@ -2,11 +2,7 @@
 using SteamCloneApp.Business.Dtos.Requests;
 using SteamCloneApp.Business.Dtos.Responses;
 using SteamCloneApp.Entities.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SteamCloneApp.Business.Services
 {
@@ -56,8 +52,6 @@ namespace SteamCloneApp.Business.Services
 
         public async Task RegisterAsync(RegisterRequest registerRequest)
         {
-            //TODO: Validasyon eklenecek
-
             CreatePasswordHash(registerRequest.Password, out string passwordHash, out string passwordSalt);
 
             var role = await _roleService.GetRoleById(2);
