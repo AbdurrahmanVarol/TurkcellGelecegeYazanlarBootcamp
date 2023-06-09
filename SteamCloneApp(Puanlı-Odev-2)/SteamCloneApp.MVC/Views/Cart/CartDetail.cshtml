@@ -60,7 +60,7 @@ else
                                                 <h6 class="card-title">${item.title}</h6>
                             </div>
                             <div class="float-end d-flex flex-column">
-                                        <span class="text-success mb-2">${item.price} TL</span>
+                                        <span class="text-success mb-2">${item.price.toFixed(2)} TL</span>
                                         <button class="badge bg-danger" style="height:30px;" data-gameId=${item.id} onclick="removeFromCart(event)">Kaldır</button>
                             </div>
                         </div>

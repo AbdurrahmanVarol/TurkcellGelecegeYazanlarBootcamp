@@ -8,7 +8,7 @@ using System.Security.Claims;
 
 namespace SteamCloneApp.MVC.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    
     public class GameController : Controller
     {
         private readonly IGameService _gameService;
@@ -29,6 +29,7 @@ namespace SteamCloneApp.MVC.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateGame()
         {
             var publishers = await _publisherService.GetAllAsync();
@@ -44,6 +45,7 @@ namespace SteamCloneApp.MVC.Controllers
             return View(viewModel);
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateGame(CreateGameRequest createGameRequest)
         {
             await _gameService.AddAsync(createGameRequest);
@@ -78,12 +80,14 @@ namespace SteamCloneApp.MVC.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GameSettings()
         {
             var games = await _gameService.GetAllAsync();
             return View(games);
         }
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteGame(Guid id)
         {
             await _gameService.DeleteAsync(id);
@@ -92,6 +96,7 @@ namespace SteamCloneApp.MVC.Controllers
             return View(nameof(GameSettings), games);
         }
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateGame(Guid id)
         {
             var game = await _gameService.GetGameByIdAsync(id);
@@ -113,6 +118,7 @@ namespace SteamCloneApp.MVC.Controllers
             return View(game);
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateGame(UpdateGameRequest updateGameRequest)
         {
             await _gameService.UpdateAsync(updateGameRequest);
