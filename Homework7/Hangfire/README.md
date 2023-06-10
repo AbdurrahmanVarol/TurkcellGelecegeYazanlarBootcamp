@@ -16,14 +16,18 @@ dotnet add package Hangfire komutu ile ekleyebilirsiniz
 
 Kullanım
 Yapacağımız iş için bir class oluşturuyoruz.
+
  ![Ekran görüntüsü 2023-06-10 141101](https://github.com/AbdurrahmanVarol/TurkcellGelecegeYazanlarBootcamp/assets/96303254/6cfd5f39-c965-442a-ad35-f1932842e07d)
 
 Daha sonra program.cs içerisine AddHangfire servisini ekliyoruz.
 AddHangfire servisinin konfigürasyonuna hangfire’ın kullanacağı veri tabanının  connection stringini ve 
 RecurringJob class’ının AdOrUpdate metoduna generic parametre olarak oluşturduğumuz iş sınıfını ekliyoruz.
+
  ![Ekran görüntüsü 2023-06-10 141447](https://github.com/AbdurrahmanVarol/TurkcellGelecegeYazanlarBootcamp/assets/96303254/946ea816-dc99-48e2-87e2-dca1acc546a0)
+ 
 
 Hangfire dasgborad’ına erişebilmek için UseHangfireDashboard middleware’ını eklemeliyiz
+
  ![Ekran görüntüsü 2023-06-10 141130](https://github.com/AbdurrahmanVarol/TurkcellGelecegeYazanlarBootcamp/assets/96303254/16b34744-a575-495d-8a04-ee193daa3496)
 
 
