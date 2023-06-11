@@ -1,5 +1,6 @@
 ##Db Diagram
-![Ekran görüntüsü 2023-06-11 094737](https://github.com/AbdurrahmanVarol/TurkcellGelecegeYazanlarBootcamp/assets/96303254/6dcc86d4-8098-4b42-afc8-054da9e015dc)
+![Ekran görüntüsü 2023-06-11 094904](https://github.com/AbdurrahmanVarol/TurkcellGelecegeYazanlarBootcamp/assets/96303254/152bf07d-5507-4d54-abed-1a709c3bbc46)
+
 
 
 ##Login ekranı
