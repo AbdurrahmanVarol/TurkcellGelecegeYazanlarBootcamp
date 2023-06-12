@@ -13,12 +13,14 @@ Callback URL’ inin yapılandırılması
 
 callback URL kullanıcılar authenticate olduktan sonra Auth0’ın yönlendirmesini istdiğin url dir.
 Eğer düzenlemezsen, kullanıcı login olduktan sonra uygulamana yönlendirilemez.
+
  ![1](https://github.com/AbdurrahmanVarol/TurkcellGelecegeYazanlarBootcamp/assets/96303254/cf4799f4-3b1e-4cc9-a0fd-661f6ac1e2e9)
 
 Logout URL’inin yapılandırılması
 
 Logout URL kullanıcılar çıkış yaptıktan sonra Auth0’ın yönlendirmesini istdiğin url dir.
 Eğer düzenlemezsen, kullanıcı çıkış yapamaz ve bir hata ile karşılaşabilirsin.
+
  ![2](https://github.com/AbdurrahmanVarol/TurkcellGelecegeYazanlarBootcamp/assets/96303254/3fc4c6bf-fbb7-4e58-95dc-893bc5ec5d0d)
 
 
