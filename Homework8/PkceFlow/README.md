@@ -33,7 +33,9 @@ Ya da package manager console’a Install-Package Auth0.AspNetCore.Authenticatio
 Program.cs yapılandırması
 
 Not: UseAuthentication ve UseAuthorization middleware’larının kullanıldığından emin ol.
+
 ![4](https://github.com/AbdurrahmanVarol/TurkcellGelecegeYazanlarBootcamp/assets/96303254/11733e1a-26f9-4bd0-ae84-10e0d337ee3a)
+
 ![5](https://github.com/AbdurrahmanVarol/TurkcellGelecegeYazanlarBootcamp/assets/96303254/93b37a98-981c-4286-a5ad-fbfda8145a43) 
 
 Login işlemi
